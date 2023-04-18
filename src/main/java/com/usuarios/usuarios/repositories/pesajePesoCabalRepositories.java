@@ -1,7 +1,6 @@
 
 package com.usuarios.usuarios.repositories;
 
-import com.usuarios.usuarios.Dto.ConsultaCuenta;
 import com.usuarios.usuarios.Dto.CuentaDto;
 import com.usuarios.usuarios.models.Cuenta;
 import com.usuarios.usuarios.models.Transportista;
@@ -19,7 +18,7 @@ public interface pesajePesoCabalRepositories extends CrudRepository<pesajePesoCa
    
     
     @Transactional
-    @Query(value = "select estado_cuenta as estadoCuenta, numero_parcialidades as numeroParcialidades,nit_agricultor as nitAgricultor from cuenta where id_cuenta= :pid_cuenta", nativeQuery = true)
+    @Query(value = "select id_cuenta,estado_cuenta,nit_agricultor,numero_pesajes_registrados,numero_parcialidades,peso_total_de_envio  from cuenta where id_cuenta= :pid_cuenta", nativeQuery = true)
     //public CuentaDto  consultarCuenta(@Param("pid_cuenta") Integer pid_cuenta);
     public String consultarCuenta(@Param("pid_cuenta") Integer pid_cuenta);
     //public String  consultarCuenta(@Param("pid_cuenta") Integer pid_cuenta);

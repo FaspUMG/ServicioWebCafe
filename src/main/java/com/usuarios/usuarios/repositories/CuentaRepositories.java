@@ -24,7 +24,8 @@ public interface CuentaRepositories extends CrudRepository<Cuenta,Integer> {
     public List<Cuenta> findAll();
     
     
-    @Query(value = "select * from cuenta where id_cuenta= :id_cuenta", nativeQuery = true)
-    @Transactional
-    public List<Cuenta>consultarCuenta(@Param("id_cuenta") Integer id_cuenta);
+    
+    //@Query(value = "select * from cuenta where id_cuenta= :id_cuenta", nativeQuery = true)
+    //@Transactional
+    //public List<Cuenta>consultarCuenta(@Param("id_cuenta") Integer id_cuenta);
 }

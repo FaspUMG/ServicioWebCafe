@@ -28,7 +28,7 @@ public class Cuenta {
     private String estado_cuenta;
     private Integer peso_total_de_envio;
     private Integer numero_parcialidades;
-    private String[] matriculas_autorizadas = new String[]{};
+    private String matriculas_autorizadas;
     private String nit_agricultor;
     private Integer numero_pesajes_registrados;
     private Date fecha_creacion;
@@ -37,11 +37,12 @@ public class Cuenta {
     public Cuenta() {
     }
 
-    public Cuenta(Integer id_cuenta, String estado_cuenta, Integer peso_total_de_envio, Integer numero_parcialidades, String nit_agricultor, Integer numero_pesajes_registrados, Date fecha_creacion, Date fecha_modificacion) {
+    public Cuenta(Integer id_cuenta, String estado_cuenta, Integer peso_total_de_envio, Integer numero_parcialidades, String matriculas_autorizadas, String nit_agricultor, Integer numero_pesajes_registrados, Date fecha_creacion, Date fecha_modificacion) {
         this.id_cuenta = id_cuenta;
         this.estado_cuenta = estado_cuenta;
         this.peso_total_de_envio = peso_total_de_envio;
         this.numero_parcialidades = numero_parcialidades;
+        this.matriculas_autorizadas = matriculas_autorizadas;
         this.nit_agricultor = nit_agricultor;
         this.numero_pesajes_registrados = numero_pesajes_registrados;
         this.fecha_creacion = fecha_creacion;
@@ -71,9 +72,10 @@ public class Cuenta {
     }
 
     @Column (name="matriculas_autorizadas")
-    public String[] getMatriculas_autorizadas() {
+    public String getMatriculas_autorizadas() {
         return matriculas_autorizadas;
     }
+
 
     @Column (name="nit_agricultor", length=13)
     public String getNit_agricultor() {
@@ -111,9 +113,11 @@ public class Cuenta {
         this.numero_parcialidades = numero_parcialidades;
     }
 
-    public void setMatriculas_autorizadas(String[] matriculas_autorizadas) {
+    public void setMatriculas_autorizadas(String matriculas_autorizadas) {
         this.matriculas_autorizadas = matriculas_autorizadas;
     }
+
+    
     
     public void setNit_agricultor(String nit_agricultor) {
         this.nit_agricultor = nit_agricultor;

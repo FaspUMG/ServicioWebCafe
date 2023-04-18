@@ -18,13 +18,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class CuentaDto {
-    private Integer id_cuenta;
-    private String estado_cuenta;
+   // private Integer id_cuenta;
+    //private String estado_cuenta;
     private Integer peso_total_de_envio;
     private Integer numero_parcialidades;
-    private String[] matriculas_autorizadas = new String[]{};
+    private String matriculas_autorizadas;
     private String nit_agricultor;
-    private Integer numero_pesajes_registrados;
-    private Date fecha_creacion;
-    
+    //private Integer numero_pesajes_registrados;
 }

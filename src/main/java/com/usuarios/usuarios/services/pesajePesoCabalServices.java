@@ -1,7 +1,6 @@
 
 package com.usuarios.usuarios.services;
 
-import com.usuarios.usuarios.Dto.ConsultaCuenta;
 import com.usuarios.usuarios.Dto.CuentaDto;
 import com.usuarios.usuarios.Dto.pesajePesoCabalDto;
 import com.usuarios.usuarios.models.Cuenta;
@@ -13,6 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.usuarios.usuarios.repositories.TransportistaRepositories;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +24,8 @@ public class pesajePesoCabalServices {
     @Autowired
     pesajePesoCabalRepositories pesajePesoCabalRepositories;
     
+    @Autowired
+    CuentaRepositories CuentaRepositories;
     
     @Transactional
     public List<pesajePesoCabal> getAllPesajes(){
@@ -56,24 +58,23 @@ public class pesajePesoCabalServices {
     public String consultarCuenta(Integer id_cuenta){
     Integer pid_cuenta = id_cuenta;
     String respuesta = pesajePesoCabalRepositories.consultarCuenta(pid_cuenta);
-     //Cuenta respuestas = new Cuenta();
-       //CuentaDto respuestas = pesajePesoCabalRepositories.consultarCuenta(pid_cuenta);
-       //ArrayList<Cuenta> respuestas = pesajePesoCabalRepositories.consultarCuenta(pid_cuenta);
-        //System.out.println("Imprimiento metodo:   "+ pesajePesoCabalRepositories.consultarCuenta(pid_cuenta));
-        //System.out.println("Estos son los datos de la cuenta: ");
-        //System.out.println("verificando idCuenta: ");
         String[] parts = respuesta.split(","); 
-        String part1 = parts[0]; // 123 String part2 = parts[1]; // 654321
-        String part2 = parts[1];
-        String part3 = parts[2];
-     //   Map<String, Object> params = new HashMap<>();
-        System.out.println("Mostrando variables: "+part1+" "+part2+" "+part3);
-       // List<ConsultaCuenta> resultado = finder.findByNamedQueryParam("cuenta", params, ConsultaCuenta.class);
+        String part1 = parts[0]; //numero de cuenta
+        String part2 = parts[1]; //estado de la cuenta
+        String part3 = parts[2]; //nit del agricultor
+        String part4 = parts[3]; //pesajes realizados
+        String part5 = parts[4]; //numero de parcialidades
+        String part6 = parts[5]; //peso total enviado en qintales
         
+        //for (int i=0;i>=parts.length;i++){
+        //    System.out.println("mostrando el recorrido: " +i);     
+        //}
+        System.out.println("Mostrando variables: "+part1+" "+part2+" "+part3+" "+part4+" "+part5+" "+part6);
+        //
+        
+
         
     return "Mostrando resultado";
     }
-    
-    
-    
+   
 }
