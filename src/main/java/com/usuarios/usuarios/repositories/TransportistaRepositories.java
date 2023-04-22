@@ -19,13 +19,13 @@ public interface TransportistaRepositories extends CrudRepository<Transportista,
     @Transactional 
     public String consultaTransportista(@Param("pLicencia") String pLicencia);
     
-    //Consulta por nit del agricultor
-    @Query(value = "select usuario.estado from  usuario where usuario.nit= :pnit limit 1", nativeQuery = true)
+   //Area de Consultas a BD
+    @Query(value = "select agricultor.estado from  agricultor where agricultor.nit= :pnit limit 1", nativeQuery = true)
     @Transactional 
     public String consultaNit(@Param("pnit") String pnit);
     
-    //Consulta Contraseña del agricultor
-    @Query(value = "select usuario.estado from  usuario where usuario.contrasena = :pcontrasena limit 1", nativeQuery = true)
+    //Area de Consultas a BD
+    @Query(value = "select agricultor.estado from  agricultor where agricultor.contrasena = :pcontrasena limit 1", nativeQuery = true)
     @Transactional 
     public String consultaContrasena(@Param("pcontrasena") String pcontrasena);
     

@@ -19,23 +19,27 @@ public class pesajePesoCabal {
     private Integer peso_de_camion;
     private Integer peso_marcado;
     private Integer peso_cargamento;
+    private String nit;
 
-    public pesajePesoCabal() {
-    }
-
-    public pesajePesoCabal(Integer id_peso, Integer id_cuenta, Integer peso_marcado, String matricula, String numero_licencia, Integer peso_de_camion, Integer peso_cargamento) {
+    public pesajePesoCabal(Integer id_peso, Integer id_cuenta, String matricula, String numero_licencia, Integer peso_de_camion, Integer peso_marcado, Integer peso_cargamento, String nit) {
         this.id_peso = id_peso;
         this.id_cuenta = id_cuenta;
         this.matricula = matricula;
         this.numero_licencia = numero_licencia;
         this.peso_de_camion = peso_de_camion;
         this.peso_marcado = peso_marcado;
-        this.peso_cargamento=peso_cargamento;
+        this.peso_cargamento = peso_cargamento;
+        this.nit = nit;
     }
+
+    public pesajePesoCabal() {
+    }
+
+   
 
     @Id
     @Column (name="id_peso")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getId_peso() {
         return id_peso;
     }
@@ -53,6 +57,11 @@ public class pesajePesoCabal {
     @Column (name="matricula", length=13)
     public String getMatricula() {
         return matricula;
+    }
+    
+    @Column (name="nit", length=20)
+    public String getNit() {
+        return nit;
     }
 
     @Column (name="numero_licencia", length=13)
@@ -84,6 +93,10 @@ public class pesajePesoCabal {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
     }
 
     public void setNumero_licencia(String numero_licencia) {
