@@ -41,12 +41,12 @@ public class Transportista {
         return numero_licencia;
     }
 
-    @Column (name="nombres", length=13)
+    @Column (name="nombres", length=50)
     public String getNombres() {
         return nombres;
     }
 
-    @Column (name="apellidos", length=13)
+    @Column (name="apellidos", length=50)
     public String getApellidos() {
         return apellidos;
     }

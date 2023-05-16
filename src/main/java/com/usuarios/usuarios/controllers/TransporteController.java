@@ -30,33 +30,22 @@ public class TransporteController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transporte/InscribirTransporte")
-    public String InscribirTransporte(
-            @RequestBody TransporteDto dto,
-            @RequestParam(required=false)String nit,
-            @RequestParam(required=false)String contrasena
-    )throws Exception{
-        return TransporteServices.InscribirTransporte(dto, nit, contrasena);
+    public String InscribirTransporte(@RequestBody TransporteDto dto) throws Exception{
+        return TransporteServices.InscribirTransporte(dto);
+    }
+     
+    //metodo para Concultar un Transporte por medio de la matricula
+    @CrossOrigin(origins="http://localhost:4200")
+    @GetMapping(value="Transporte/consultaTransporte")
+    public String consultarTransporte(@RequestBody TransporteDto dto)throws Exception{
+        return TransporteServices.consultarTransporte(dto);
     }
     
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
-    @PostMapping(value="Transporte/consultaTransporte")
-    public String consultarTransporte(
-            @RequestBody TransporteDto dto,
-            @RequestParam(required=false)String nit,
-            @RequestParam(required=false)String contrasena
-    )throws Exception{
-        return TransporteServices.consultarTransporte(dto, nit, contrasena);
-    }
-    //metodo para crear un usuario
-    @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transporte/eliminarTransporte")
-    public String eliminarTransporte(
-            @RequestBody TransporteDto dto,
-            @RequestParam(required=false)String nit,
-            @RequestParam(required=false)String contrasena
-    )throws Exception{
-        return TransporteServices.eliminarTransporte(dto, nit, contrasena);
+    public String eliminarTransporte(@RequestBody TransporteDto dto)throws Exception{
+        return TransporteServices.eliminarTransporte(dto);
     }
    
 }

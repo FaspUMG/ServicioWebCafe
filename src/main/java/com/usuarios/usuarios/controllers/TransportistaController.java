@@ -26,34 +26,22 @@ public class TransportistaController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transportista/InscribirTransportista")
-    public String InscribirTransportista(
-            @RequestBody TransportistaDto dto,
-            @RequestParam(required=false)String nit,
-            @RequestParam(required=false)String contrasena
-    ) throws Exception{
-        return TransportistaServices.InscribirTransportista(dto, nit, contrasena);
+    public String InscribirTransportista(@RequestBody TransportistaDto dto) throws Exception {
+        return TransportistaServices.InscribirTransportista(dto);
     }
     
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
-    @PostMapping(value="Transportista/consultaTransportista")
-    public String consultaTransportista(
-            @RequestBody TransportistaDto dto,
-            @RequestParam(required=false)String nit,
-            @RequestParam(required=false)String contrasena
-    )throws Exception{
-        return TransportistaServices.consultaTransportista(dto, nit, contrasena);
+    @GetMapping(value="Transportista/consultaTransportista")
+    public String consultaTransportista(@RequestBody TransportistaDto dto)throws Exception{
+        return TransportistaServices.consultaTransportista(dto);
     }
     
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transportista/eliminarTransportista")
-    public String eliminarTransportista(
-            @RequestBody TransportistaDto dto,
-            @RequestParam(required=false)String nit,
-            @RequestParam(required=false)String contrasena
-    )throws Exception{
-        return TransportistaServices.eliminarTransportista(dto, nit, contrasena);
+    public String eliminarTransportista(@RequestBody TransportistaDto dto)throws Exception{
+        return TransportistaServices.eliminarTransportista(dto);
     }
     
 }

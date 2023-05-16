@@ -27,10 +27,7 @@ public class TransporteServices {
     }
 
     @Transactional
-    public String InscribirTransporte(TransporteDto dto, String nit, String contrasena) throws Exception {
-        String a = nit;
-        String b = this.encriptar(contrasena);
-        String c = this.desencriptar(b);
+    public String InscribirTransporte(TransporteDto dto) throws Exception {
         java.util.Date fecha = new Date();
         final Transporte Transporte = new Transporte();
         Transporte.setMatricula(dto.getMatricula());
@@ -42,25 +39,17 @@ public class TransporteServices {
         Transporte.setFecha_inscripcion(fecha);
         Transporte.setColor(dto.getColor());
         Transporte.setEstado(1020);
-        if (this.consultaDatos(a,b)) {
             if (dto.getModelo() >= 1960) {
                 TransporteRepositories.save(Transporte);
                 return "Transporte Inscrito Correctamente en el beneficio";
             } else {
                 return "El Transporte debe ser modelo 1960 o mas reciente";
-            }
-        } else {
-            return "Estimado Agricultor, sus credenciales no son correctas.   Acceso no autorizado";
-        }
+            } 
     }
 
-    public String consultarTransporte(TransporteDto dto, String nit, String contrasena) throws Exception {
-        String a = nit;
-        String b = this.encriptar(contrasena);
-        String c = this.desencriptar(b);
+    public String consultarTransporte(TransporteDto dto) throws Exception {
         String pMatricula = dto.getMatricula();
         String matricula = this.TransporteRepositories.consultaTransporte(pMatricula);
-        if (this.consultaDatos(a,b)) {
         if (matricula == null || matricula.equals("")) {
             return "No se Obtuvieron datos del Transporte ingresado";
         } else {
@@ -77,10 +66,7 @@ public class TransporteServices {
                 default :
                       return  "No se obtuvo el estado del vehiculo con las placas: "+pMatricula;
             }
-        }
-        }else {
-            return "Estimado Agricultor, sus credenciales no son correctas.   Acceso no autorizado";
-        }
+        }  
     }
 
     public boolean consultaDatos(String a, String b) {
@@ -101,21 +87,16 @@ public class TransporteServices {
         }
     }
     
-    //Metodo para eliminar Transporte activo o inactivo.
-    public String eliminarTransporte(TransporteDto dto, String nit, String contrasena) throws Exception {
-        String a = nit;
-        String b = this.encriptar(contrasena);
-        String pMatricula = dto.getMatricula();
-        if (this.consultaDatos(a, b)) {
+    //Metodo para eliminar Transporte activo o inactivo por medio del numero de matriculas.
+    public String eliminarTransporte(TransporteDto dto) throws Exception { 
+        
+        String pMatricula = dto.getMatricula(); 
             int matricula = this.TransporteRepositories.eliminaTransporte(pMatricula);
             if (matricula > 0) {
                 return "El transporte con las placas: "+pMatricula+" fue eliminado con exito";
             } else {
                 return "Error al eliminar el transporte con las placas: "+pMatricula+"";
-            }
-        } else {
-            return "Estimado Agricultor, sus credenciales no son correctas.   Acceso no autorizado";
-        }
+            } 
     }
     
      public static String encriptar(String texto) throws Exception {

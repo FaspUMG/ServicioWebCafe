@@ -6,7 +6,6 @@
 package com.usuarios.usuarios.repositories;
 
 import com.usuarios.usuarios.models.Agricultor;
-import com.usuarios.usuarios.models.usuario;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
