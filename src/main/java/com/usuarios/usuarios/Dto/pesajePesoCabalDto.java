@@ -1,5 +1,6 @@
 package com.usuarios.usuarios.Dto;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,8 @@ public class pesajePesoCabalDto {
     private String numero_licencia;
     private Integer peso_marcado;
     private Integer peso_de_camion;
-    private String nit;
+    private String agricultor;
+    private String usuario_registro_pesaje;
+    private Date fecha_creacion ;
     //private Integer peso_cargamento;
  }

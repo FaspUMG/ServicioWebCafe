@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package com.usuarios.usuarios.security.dto;
+import java.util.Date;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -22,6 +24,14 @@ public class NuevoUsuario {
     private String email;
     @NotBlank
     private String password;
+    @NotBlank
+    private String nit;
+    @NotBlank
+    private String fecha_creacion;
+    @NotBlank
+    private String direccion;
+    @NotBlank
+    private String telefono;
     private Set<String> roles = new HashSet<>();
 
     public String getNombre() {
@@ -56,6 +66,37 @@ public class NuevoUsuario {
         this.password = password;
     }
 
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
     public Set<String> getRoles() {
         return roles;
     }

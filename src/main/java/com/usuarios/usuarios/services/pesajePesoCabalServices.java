@@ -14,18 +14,21 @@ import org.springframework.stereotype.Service;
 import com.usuarios.usuarios.repositories.TransportistaRepositories;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 @Transactional
 public class pesajePesoCabalServices { 
+    private String creada= "Cuenta Creada";
+    private String completada= "Pesaje Finalizado";
     private String id_cuenta;
     private String estado_cuenta;
     private Integer peso_total_de_envio;
     private Integer numero_parcialidades;
     private String matriculas_autorizadas;
-    private String nit_agricultor;
+    private String usuario_agricultor;
     private Integer numero_pesajes_registrados;
     private String matriculas;
     private int completado;
@@ -43,26 +46,33 @@ public class pesajePesoCabalServices {
     
     @Transactional
     public String createPesaje(pesajePesoCabalDto dto) {
+        java.util.Date fecha = new Date();
         final pesajePesoCabal pesajePesoCabal = new pesajePesoCabal();
         pesajePesoCabal.setId_cuenta(dto.getId_cuenta());
         pesajePesoCabal.setMatricula(dto.getMatricula());
         pesajePesoCabal.setNumero_licencia(dto.getNumero_licencia());
         pesajePesoCabal.setPeso_marcado(dto.getPeso_marcado());
         pesajePesoCabal.setPeso_de_camion(dto.getPeso_de_camion());
-        pesajePesoCabal.setNit(dto.getNit());
+        pesajePesoCabal.setAgricultor(dto.getAgricultor());
+        pesajePesoCabal.setFecha_creacion(fecha);
+        pesajePesoCabal.setUsuario_registro_pesaje(dto.getUsuario_registro_pesaje());
         pesajePesoCabal.setPeso_cargamento((dto.getPeso_marcado()) - (dto.getPeso_de_camion()));
         Integer cuenta = dto.getId_cuenta();
         String id = cuenta.toString();
-        String nit = dto.getNit();
+        String user = dto.getAgricultor();
         String placa = dto.getMatricula();
         String licencia = dto.getNumero_licencia();
         if (dto.getPeso_marcado() <= dto.getPeso_de_camion()) {
             return "El pesaje marcado no puede ser menor al peso del camion.";
         } else {
             this.consultarCuenta(cuenta);
+            if(this.estado_cuenta.equals(this.creada) || this.estado_cuenta.equals(this.completada)){
+                return "No se permite registrar el pesaje.  Estado de la cuenta: "+ this.estado_cuenta;
+            }else{
+                System.out.println("El estado actual de la cuenta es: "+this.estado_cuenta);
             if (id.equals(this.id_cuenta)) {
                 System.out.println("El numero de cuenta es si esta almacenado.");
-                if (nit.equals(this.nit_agricultor)) {
+                if (user.equals(this.usuario_agricultor)) {
                     System.out.println("El nit es correcto para la cuenta");
                     String[] placas = this.matriculas.split(",");
                     String placa_encontrada = "";
@@ -129,26 +139,27 @@ public class pesajePesoCabalServices {
                         return "No se encontro registro de la Matricula Ingresada";
                     }
                 } else {
-                    return "El nit ingresado no pertenece a la cuenta";
+                    return "La cuenta no esta asociada al Usuario Agricultor Ingresado";
                 }
             } else {
                 return "El numero Id de cuenta ingresado no existe en los registros de Productores de café";
             }
+            }
         }
     }
     
-    public String consultarCuenta(Integer id_cuenta) {
+    public String consultarCuenta(Integer id_cuenta) {  //Metodo para consultar datos sobre la cuenta ingresada por medio del parametro recibido id_cuenta
         Integer pid_cuenta = id_cuenta;
         String respuesta = pesajePesoCabalRepositories.consultarCuenta(pid_cuenta);
         if (respuesta != null && respuesta != "") {
             String[] parts = respuesta.split(",");
             this.id_cuenta = parts[0]; //numero de cuenta
             this.estado_cuenta = parts[1]; //estado de la cuenta
-            this.nit_agricultor = parts[2]; //nit del agricultor
+            this.usuario_agricultor = parts[2]; //Usuario del agricultor
             this.numero_pesajes_registrados = Integer.parseInt(parts[3]); //pesajes realizados
             this.numero_parcialidades = Integer.parseInt(parts[4]); //numero de parcialidades
             this.peso_total_de_envio = Integer.parseInt(parts[5]); //peso total enviado en qintales
-            System.out.println("Mostrando variables: " + id_cuenta + " " + estado_cuenta + " " + nit_agricultor + " " + numero_pesajes_registrados + " " + numero_parcialidades + " " + peso_total_de_envio);
+            System.out.println("Mostrando variables: " + id_cuenta + " " + estado_cuenta + " " + usuario_agricultor + " " + numero_pesajes_registrados + " " + numero_parcialidades + " " + peso_total_de_envio);
             this.matriculas = pesajePesoCabalRepositories.consultarMatriculas(pid_cuenta);
             return "Mostrando resultado";
         } else {

@@ -16,6 +16,7 @@ C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafet
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\repositories\TransporteRepositories.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\models\Producto.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\dto\LoginUsuario.java
+C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\Dto\BeneficioDto.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\controller\AuthController.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\MainSecurity.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\models\Usuario.java
@@ -26,12 +27,14 @@ C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafet
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\jwt\JwtTokenFilter.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\dto\NuevoUsuario.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\repositories\pesajePesoCabalRepositories.java
+C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\services\BeneficioServices.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\Dto\User.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\models\Cuenta.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\dto\JwtDto.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\models\pesajePesoCabal.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\repositories\ProductoRepository.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\util\CreateRoles.java
+C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\controllers\BeneficioController.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\jwt\JwtProvider.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\services\AgricultorServices.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\models\Rol.java
@@ -44,9 +47,11 @@ C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafet
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\service\UserDetailsServiceImpl.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\models\Transportista.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\security\service\UsuarioService.java
+C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\models\Beneficio.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\controllers\AgricultorController.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\models\Agricultor.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\Dto\Mensaje.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\Dto\pesajePesoCabalDto.java
+C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\repositories\BeneficioRepositories.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\controllers\TransportistaController.java
 C:\Users\fasp9\CarpetaVideosCapacitaciones\BackEndWS\usuarios\Servicio_Web_Cafetito\src\main\java\com\usuarios\usuarios\services\ProductoServices.java

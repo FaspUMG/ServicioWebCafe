@@ -21,11 +21,15 @@ public class Transportista {
     private Integer estado;
     private Date fecha_inscripcion;
     private Date fecha_modificacion;
+    private String usuario_creo;
+    private String usuario_modifico;
+    private boolean disponibilidad;
+    //private String nit;
 
     public Transportista() {
     }
 
-    public Transportista(String numero_licencia, String nombres, String apellidos, String tipo_licencia, Integer estado, Date fecha_inscripcion, Date fecha_modificacion) {
+    public Transportista(String numero_licencia, String nombres, String apellidos, String tipo_licencia, Integer estado, Date fecha_inscripcion, Date fecha_modificacion, String usuario_creo, String usuario_modifico, boolean disponibilidad) {
         this.numero_licencia = numero_licencia;
         this.nombres = nombres;
         this.apellidos = apellidos;
@@ -33,6 +37,10 @@ public class Transportista {
         this.estado = estado;
         this.fecha_inscripcion = fecha_inscripcion;
         this.fecha_modificacion = fecha_modificacion;
+        this.usuario_creo = usuario_creo;
+        this.usuario_modifico = usuario_modifico;
+        this.disponibilidad = disponibilidad;
+        //this.nit = nit;
     }
 
     @Id
@@ -71,6 +79,25 @@ public class Transportista {
         return fecha_modificacion;
     }
 
+    @Column (name="usuario_creo", length=13)
+    public String getUsuario_creo() {
+        return usuario_creo;
+    }
+    
+    @Column (name="usuario_modifico", length=13)
+    public String getUsuario_modifico() {
+        return usuario_modifico;
+    }
+    
+    @Column (name="disponibilidad")
+    public boolean isDisponibilidad() {
+        return disponibilidad;
+    }
+    
+    /*@Column (name="nit", length=13)
+    public String getNit() {
+        return nit;
+    }*/
     public void setNumero_licencia(String numero_licencia) {
         this.numero_licencia = numero_licencia;
     }
@@ -98,4 +125,21 @@ public class Transportista {
     public void setFecha_modificacion(Date fecha_modificacion) {
         this.fecha_modificacion = fecha_modificacion;
     }
+
+    public void setUsuario_creo(String usuario_creo) {
+        this.usuario_creo = usuario_creo;
+    }
+
+    public void setUsuario_modifico(String usuario_modifico) {
+        this.usuario_modifico = usuario_modifico;
+    }
+
+    /*public void setNit(String nit) {
+        this.nit = nit;
+    }*/
+
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+    
 }

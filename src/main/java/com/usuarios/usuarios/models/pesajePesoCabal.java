@@ -2,6 +2,7 @@
 package com.usuarios.usuarios.models;
 
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,9 +20,13 @@ public class pesajePesoCabal {
     private Integer peso_de_camion;
     private Integer peso_marcado;
     private Integer peso_cargamento;
-    private String nit;
+    private String agricultor;
+    private String usuario_registro_pesaje;
+    private Date fecha_creacion ;
+    
+    
 
-    public pesajePesoCabal(Integer id_peso, Integer id_cuenta, String matricula, String numero_licencia, Integer peso_de_camion, Integer peso_marcado, Integer peso_cargamento, String nit) {
+    public pesajePesoCabal(Integer id_peso, Integer id_cuenta, String matricula, String numero_licencia, Integer peso_de_camion, Integer peso_marcado, Integer peso_cargamento, String agricultor, String usuario_registro_pesaje, Date fecha_creacion) {
         this.id_peso = id_peso;
         this.id_cuenta = id_cuenta;
         this.matricula = matricula;
@@ -29,13 +34,13 @@ public class pesajePesoCabal {
         this.peso_de_camion = peso_de_camion;
         this.peso_marcado = peso_marcado;
         this.peso_cargamento = peso_cargamento;
-        this.nit = nit;
+        this.agricultor = agricultor;
+        this.usuario_registro_pesaje = usuario_registro_pesaje;
+        this.fecha_creacion = fecha_creacion;
     }
 
     public pesajePesoCabal() {
     }
-
-   
 
     @Id
     @Column (name="id_peso")
@@ -59,10 +64,6 @@ public class pesajePesoCabal {
         return matricula;
     }
     
-    @Column (name="nit", length=20)
-    public String getNit() {
-        return nit;
-    }
 
     @Column (name="numero_licencia", length=13)
     public String getNumero_licencia() {
@@ -78,7 +79,22 @@ public class pesajePesoCabal {
     public Integer getPeso_cargamento() {
         return peso_cargamento;
     }
-    
+
+    @Column (name="agricultor")
+    public String getAgricultor() {
+        return agricultor;
+    }
+
+    @Column (name="usuario_registro_pesaje")
+    public String getUsuario_registro_pesaje() {
+        return usuario_registro_pesaje;
+    }
+
+    @Column (name="fecha_creacion")
+    public Date getFecha_creacion() {
+        return fecha_creacion;
+    }
+
     public void setId_peso(Integer id_peso) {
         this.id_peso = id_peso;
     }
@@ -94,10 +110,7 @@ public class pesajePesoCabal {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
+    
 
     public void setNumero_licencia(String numero_licencia) {
         this.numero_licencia = numero_licencia;
@@ -110,5 +123,18 @@ public class pesajePesoCabal {
     public void setPeso_cargamento(Integer peso_cargamento) {
         this.peso_cargamento = peso_cargamento;
     }
+
+    public void setAgricultor(String agricultor) {
+        this.agricultor = agricultor;
+    }
+
+    public void setUsuario_registro_pesaje(String usuario_registro_pesaje) {
+        this.usuario_registro_pesaje = usuario_registro_pesaje;
+    }
+
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+    
     
 }

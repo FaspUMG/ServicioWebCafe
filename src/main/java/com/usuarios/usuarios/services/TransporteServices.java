@@ -20,10 +20,16 @@ public class TransporteServices {
      private static final String clave = "MiClaveSecreta12"; // Clave secreta para encriptar
     @Autowired
     TransporteRepositories TransporteRepositories;
-
+    
     @Transactional
     public List<Transporte> getAllTransporte() {
         return TransporteRepositories.findAll();
+    }
+    
+    
+    @Transactional
+    public List<Transporte> getAllTransporte(String a) {
+        return this.TransporteRepositories.consulta(a);  
     }
 
     @Transactional
@@ -34,7 +40,10 @@ public class TransporteServices {
         Transporte.setModelo(dto.getModelo());
         Transporte.setNumero_ejes(dto.getNumero_ejes());
         Transporte.setMarca(dto.getMarca());
-        Transporte.setPeso_de_camion(dto.getPeso_de_camion());
+        //Transporte.setPeso_de_camion(dto.getPeso_de_camion());
+        Transporte.setUsuario_creo(dto.getUsuario_creo());
+        Transporte.setDisponibilidad(true);
+        //Transporte.setNit(dto.getNit());
         //Transporte.setPeso_de_mercaderia(dto.getPeso_de_mercaderia());
         Transporte.setFecha_inscripcion(fecha);
         Transporte.setColor(dto.getColor());
@@ -68,6 +77,8 @@ public class TransporteServices {
             }
         }  
     }
+    
+    
 
     public boolean consultaDatos(String a, String b) {
         String pnit = a;

@@ -19,7 +19,7 @@ public interface pesajePesoCabalRepositories extends CrudRepository<pesajePesoCa
    
     
     @Transactional
-    @Query(value = "select id_cuenta,estado_cuenta,nit_agricultor,numero_pesajes_registrados,numero_parcialidades,peso_total_de_envio  from cuenta where id_cuenta= :pid_cuenta", nativeQuery = true)
+    @Query(value = "select id_cuenta,estado_cuenta,usuario_agricultor,numero_pesajes_registrados,numero_parcialidades,peso_total_de_envio  from cuenta where id_cuenta= :pid_cuenta", nativeQuery = true)
     public String consultarCuenta(@Param("pid_cuenta") Integer pid_cuenta);
     
    

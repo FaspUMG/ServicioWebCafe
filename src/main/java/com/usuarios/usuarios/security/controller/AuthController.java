@@ -14,6 +14,7 @@ import com.usuarios.usuarios.security.roles.RolNombre;
 import com.usuarios.usuarios.security.jwt.JwtProvider;
 import com.usuarios.usuarios.security.service.RolService;
 import com.usuarios.usuarios.security.service.UsuarioService;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,7 @@ import java.util.Set;
 @RequestMapping("/auth")
 @CrossOrigin
 public class AuthController {
+    java.util.Date fecha = new Date();
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -54,14 +56,14 @@ public class AuthController {
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return new ResponseEntity(new Mensaje("campos mal puestos o email inválido"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Mensaje("Ingreso de correo invalido"), HttpStatus.BAD_REQUEST);
         if(usuarioService.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
-            return new ResponseEntity(new Mensaje("ese nombre ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Mensaje("Ya Existe un nombre de usuario con ese nombre"), HttpStatus.BAD_REQUEST);
         if(usuarioService.existsByEmail(nuevoUsuario.getEmail()))
-            return new ResponseEntity(new Mensaje("ese email ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Mensaje("El email ingresado ya esta registrado."), HttpStatus.BAD_REQUEST);
         Usuario usuario =
                 new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getNombreUsuario(), nuevoUsuario.getEmail(),
-                        passwordEncoder.encode(nuevoUsuario.getPassword()));
+                        passwordEncoder.encode(nuevoUsuario.getPassword()), nuevoUsuario.getFecha_creacion(), nuevoUsuario.getNit(), nuevoUsuario.getDireccion(), nuevoUsuario.getTelefono());
         Set<Rol> roles = new HashSet<>();
         if(nuevoUsuario.getRoles().contains("Agricultor"))
             roles.add(rolService.getByRolNombre(RolNombre.ROLE_AGRICULTOR).get());

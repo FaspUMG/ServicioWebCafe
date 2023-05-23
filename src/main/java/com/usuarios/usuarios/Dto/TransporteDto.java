@@ -17,5 +17,6 @@ public class TransporteDto {
     private String marca;
     private String color;
     private Integer peso_de_camion;
+    private String usuario_creo;
     
 }

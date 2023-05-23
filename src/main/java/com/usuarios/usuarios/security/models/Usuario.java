@@ -5,6 +5,7 @@
  */
 package com.usuarios.usuarios.security.models;
 
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -29,6 +30,15 @@ public class Usuario {
     @NotNull
     private String password;
     @NotNull
+    private String fecha_creacion;
+    @NotNull
+    private String nit;
+    @NotNull
+    private String direccion;
+    @NotNull
+    private String telefono;
+    
+    @NotNull
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"),
     inverseJoinColumns = @JoinColumn(name = "rol_id"))
@@ -37,11 +47,15 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String email, @NotNull String password) {
+    public Usuario(@NotNull String nombre, @NotNull String nombreUsuario, @NotNull String email, @NotNull String password, @NotNull String fecha_creacion, @NotNull String nit, @NotNull String direccion, @NotNull String telefono) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.email = email;
         this.password = password;
+        this.fecha_creacion = fecha_creacion;
+        this.nit = nit;
+        this.direccion = direccion;
+        this.telefono = telefono;
     }
 
     public int getId() {
@@ -91,5 +105,38 @@ public class Usuario {
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
     }
+
+    public String getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(String fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public String getNit() {
+        return nit;
+    }
+
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
     
 }

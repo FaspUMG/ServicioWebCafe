@@ -39,6 +39,11 @@ public class TransportistaServices {
     }
     
     @Transactional
+    public List<Transportista> getAllTransportista(String a) {
+        return this.TransportistaRepositories.consulta(a);  
+    }
+    
+    @Transactional
    public String InscribirTransportista (TransportistaDto dto) throws Exception{       
         
        final Transportista Transportista = new Transportista ();
@@ -47,10 +52,14 @@ public class TransportistaServices {
        Transportista.setApellidos(dto.getApellidos());
        Transportista.setTipo_licencia(dto.getTipo_licencia());
        Transportista.setFecha_inscripcion(this.fecha);
+       Transportista.setUsuario_creo(dto.getUsuario_creo());
        Transportista.setEstado(1020);
+       Transportista.setDisponibilidad(true);
        if(dto.getTipo_licencia().equals("A")){
+           System.out.println("Mostrando el ingreso del usuario_creo: "+dto.getUsuario_creo() );
          TransportistaRepositories.save(Transportista);
          return "El Transportista fue Inscrito Correctamente en el Beneficio";
+           
        }else{
         return "El Transportista debe tener licencia tipo A";
        } 

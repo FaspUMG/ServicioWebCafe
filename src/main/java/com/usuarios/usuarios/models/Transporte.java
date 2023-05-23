@@ -17,25 +17,33 @@ public class Transporte {
     private String marca;
     private Integer estado;
     private String color;
-    private Integer peso_de_camion;
-    private Integer peso_de_mercaderia;
+   // private Integer peso_de_camion;
+    //private Integer peso_de_mercaderia;
     private Date fecha_inscripcion ;
     private String fecha_modificacion;
+    private String usuario_creo;
+    private String usuario_modifico;
+    private boolean disponibilidad;
+    //private String nit;
 
     public Transporte() {
     }
 
-    public Transporte(String matricula, Integer modelo, String numero_ejes, String marca, Integer estado, String color, Integer peso_de_camion, Integer peso_de_mercaderia, Date fecha_inscripcion, String fecha_modificacion) {
+    public Transporte(String matricula, Integer modelo, String numero_ejes, String marca, Integer estado, String color, Date fecha_inscripcion, String fecha_modificacion, String usuario_creo, String usuario_modifico, boolean disponibilidad) {
         this.matricula = matricula;
         this.modelo = modelo;
         this.numero_ejes = numero_ejes;
         this.marca = marca;
         this.estado = estado;
         this.color = color;
-        this.peso_de_camion = peso_de_camion;
-        this.peso_de_mercaderia = peso_de_mercaderia;
+        //this.peso_de_camion = peso_de_camion;
+        //this.peso_de_mercaderia = peso_de_mercaderia;
         this.fecha_inscripcion = fecha_inscripcion;
         this.fecha_modificacion = fecha_modificacion;
+        this.usuario_creo = usuario_creo;
+        this.usuario_modifico = usuario_modifico;
+        this.disponibilidad = disponibilidad;
+        //this.nit = nit;
     }
 
     @Id
@@ -69,7 +77,7 @@ public class Transporte {
         return color;
     }
 
-    @Column (name="peso_de_camion")
+    /*@Column (name="peso_de_camion")
     public Integer getPeso_de_camion() {
         return peso_de_camion;
     }
@@ -77,7 +85,7 @@ public class Transporte {
     @Column (name="peso_de_mercaderia")
     public Integer getPeso_de_mercaderia() {
         return peso_de_mercaderia;
-    }
+    }*/
 
     @Column (name="fecha_inscripcion")
     public Date getFecha_inscripcion() {
@@ -88,6 +96,28 @@ public class Transporte {
     public String getFecha_modificacion() {
         return fecha_modificacion;
     }
+    
+    @Column (name="usuario_creo", length=13)
+    public String getUsuario_creo() {
+        return usuario_creo;
+    }
+    
+    @Column (name="usuario_modifico", length=13)
+    public String getUsuario_modifico() {
+        return usuario_modifico;
+    }
+
+    @Column (name="disponibilidad")
+    public boolean isDisponibilidad() {
+        return disponibilidad;
+    }
+    
+    
+    
+    /*@Column (name="nit", length=13)
+    public String getNit() {
+        return nit;
+    }*/
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
@@ -113,13 +143,13 @@ public class Transporte {
         this.color = color;
     }
 
-    public void setPeso_de_camion(Integer peso_de_camion) {
+    /*public void setPeso_de_camion(Integer peso_de_camion) {
         this.peso_de_camion = peso_de_camion;
     }
 
     public void setPeso_de_mercaderia(Integer peso_de_mercaderia) {
         this.peso_de_mercaderia = peso_de_mercaderia;
-    }
+    }*/
 
     public void setFecha_inscripcion(Date fecha_inscripcion) {
         this.fecha_inscripcion = fecha_inscripcion;
@@ -129,7 +159,21 @@ public class Transporte {
         this.fecha_modificacion = fecha_modificacion;
     }
 
+    public void setUsuario_creo(String usuario_creo) {
+        this.usuario_creo = usuario_creo;
+    }
+
+    public void setUsuario_modifico(String usuario_modifico) {
+        this.usuario_modifico = usuario_modifico;
+    }
     
-   
+
+    /*public void setNit(String nit) {
+        this.nit = nit;
+    }*/
+
+    public void setDisponibilidad(boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
     
 }

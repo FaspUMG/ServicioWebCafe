@@ -30,6 +30,11 @@ public class TransportistaController {
         return TransportistaServices.InscribirTransportista(dto);
     }
     
+    @GetMapping(value="Transporte/AsignacionTransportistas")
+    public List<Transportista> getTransporteS (@RequestParam String a) throws Exception{
+        return TransportistaServices.getAllTransportista(a);
+    }
+    
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(value="Transportista/consultaTransportista")

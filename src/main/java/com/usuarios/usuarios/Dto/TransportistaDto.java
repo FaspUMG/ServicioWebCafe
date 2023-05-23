@@ -13,6 +13,7 @@ public class TransportistaDto {
     private String nombres; 
     private String apellidos; 
     private String tipo_licencia;
+    private String usuario_creo;
     //private Integer estado;
     //private Date fecha_inscripcion;
     //private Date fecha_modificacion;

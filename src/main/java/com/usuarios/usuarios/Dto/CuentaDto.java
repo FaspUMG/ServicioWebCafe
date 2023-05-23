@@ -23,6 +23,6 @@ public class CuentaDto {
     private Integer peso_total_de_envio;
     private Integer numero_parcialidades;
     private String matriculas_autorizadas;
-    private String nit_agricultor;
+    private String usuario_agricultor;
     //private Integer numero_pesajes_registrados;
 }

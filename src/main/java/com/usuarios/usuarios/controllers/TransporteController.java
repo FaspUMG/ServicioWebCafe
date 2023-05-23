@@ -27,6 +27,11 @@ public class TransporteController {
         return TransporteServices.getAllTransporte();
     }
     
+    @GetMapping(value="Transporte/AsignacionTransporte")
+    public List<Transporte> getTransporteS (@RequestParam String a) throws Exception{
+        return TransporteServices.getAllTransporte(a);
+    }
+    
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transporte/InscribirTransporte")
