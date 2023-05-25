@@ -30,5 +30,8 @@ public interface CuentaRepositories extends CrudRepository<Cuenta,Integer> {
     @Transactional(readOnly=true)
     public List<Cuenta>consultarCuenta(@Param("idCuenta") Integer idCuenta);
     
+    @Query(value = "select * from cuenta where usuario_agricultor=:pa  ", nativeQuery = true)
+    @Transactional 
+    public List<Cuenta> consulta( @Param("pa")String a);
     
 }

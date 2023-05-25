@@ -7,6 +7,7 @@ package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.CuentaDto;
 import com.usuarios.usuarios.models.Cuenta;
+import com.usuarios.usuarios.models.Transportista;
 import com.usuarios.usuarios.services.CuentaServices;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -38,6 +40,12 @@ public class CuentaController {
     @PostMapping(value="Cuenta/CrearCuenta")
     public String crearAgricultor(@RequestBody CuentaDto dto) throws Exception{
         return CuentaServices.crearCuenta(dto);
+    }
+    
+    @CrossOrigin(origins="http://localhost:4200")
+    @GetMapping(value="Cuenta/ListadoCuentas")
+    public List<Cuenta> getTransporteS (@RequestParam String a) throws Exception{
+        return CuentaServices.getAllCuentas(a);
     }
     
 }

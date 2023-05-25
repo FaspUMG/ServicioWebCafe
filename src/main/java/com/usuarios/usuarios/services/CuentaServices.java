@@ -34,6 +34,12 @@ public class CuentaServices {
         return CuentaRepositories.findAll();
     }
     
+     
+    @Transactional
+    public List<Cuenta> getAllCuentas(String a) {
+        return this.CuentaRepositories.consulta(a);  
+    }
+    
     @Transactional
     public String crearCuenta(CuentaDto dto) throws Exception{
         int valor = this.getFiveDigitsNumber();

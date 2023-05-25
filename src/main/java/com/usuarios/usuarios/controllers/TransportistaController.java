@@ -31,7 +31,7 @@ public class TransportistaController {
     }
     
     @CrossOrigin(origins="http://localhost:4200")
-    @GetMapping(value="Transporte/AsignacionTransportistas")
+    @GetMapping(value="Transportista/AsignacionTransportistas")
     public List<Transportista> getTransporteS (@RequestParam String a) throws Exception{
         return TransportistaServices.getAllTransportista(a);
     }
