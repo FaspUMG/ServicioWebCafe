@@ -30,13 +30,14 @@ public class Cuenta {
     private String matriculas_autorizadas;
     private String usuario_agricultor;
     private Integer numero_pesajes_registrados;
+    private Integer parcialidades_generadas;
     private Date fecha_creacion;
     private Date fecha_modificacion;
 
     public Cuenta() {
     }
 
-    public Cuenta(Integer id_cuenta, String estado_cuenta, Integer peso_total_de_envio, Integer numero_parcialidades, String matriculas_autorizadas, String usuario_agricultor, Integer numero_pesajes_registrados, Date fecha_creacion, Date fecha_modificacion) {
+    public Cuenta(Integer id_cuenta, String estado_cuenta, Integer peso_total_de_envio, Integer numero_parcialidades, String matriculas_autorizadas, String usuario_agricultor, Integer numero_pesajes_registrados, Date fecha_creacion, Date fecha_modificacion, Integer parcialidades_generadas) {
         this.id_cuenta = id_cuenta;
         this.estado_cuenta = estado_cuenta;
         this.peso_total_de_envio = peso_total_de_envio;
@@ -46,6 +47,7 @@ public class Cuenta {
         this.numero_pesajes_registrados = numero_pesajes_registrados;
         this.fecha_creacion = fecha_creacion;
         this.fecha_modificacion = fecha_modificacion;
+        this.parcialidades_generadas = parcialidades_generadas;
     }
 
     
@@ -84,6 +86,12 @@ public class Cuenta {
     public Integer getNumero_pesajes_registrados() {
         return numero_pesajes_registrados;
     }
+    
+    @Column (name="parcialidades_generadas")
+    public Integer getParcialidades_generadas() {
+        return parcialidades_generadas;
+    }
+    
 
     @Column (name="fecha_creacion")
     public Date getFecha_creacion() {
@@ -129,6 +137,10 @@ public class Cuenta {
 
     public void setFecha_modificacion(Date fecha_modificacion) {
         this.fecha_modificacion = fecha_modificacion;
+    }
+
+    public void setParcialidades_generadas(Integer parcialidades_generadas) {
+        this.parcialidades_generadas = parcialidades_generadas;
     }
     
     

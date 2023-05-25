@@ -27,6 +27,7 @@ public class TransporteController {
         return TransporteServices.getAllTransporte();
     }
     
+    @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(value="Transporte/AsignacionTransporte")
     public List<Transporte> getTransporteS (@RequestParam String a) throws Exception{
         return TransporteServices.getAllTransporte(a);

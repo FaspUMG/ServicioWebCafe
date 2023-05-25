@@ -47,6 +47,7 @@ public class CuentaServices {
         Cuenta.setMatriculas_autorizadas(dto.getMatriculas_autorizadas());
         Cuenta.setUsuario_agricultor(dto.getUsuario_agricultor());
         Cuenta.setNumero_pesajes_registrados(0);
+        Cuenta.setParcialidades_generadas(0);
         CuentaRepositories.save(Cuenta);
         return "Cuenta Creada Exitosamente, su numero de cuenta es: "+ valor;
     }

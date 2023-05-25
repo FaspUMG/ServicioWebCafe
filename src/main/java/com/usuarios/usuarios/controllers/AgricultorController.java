@@ -25,16 +25,11 @@ public class AgricultorController {
     @Autowired
     AgricultorServices AgricultorServices;
     
-    @CrossOrigin(origins="http://localhost:4200")
-    @GetMapping(value="Agricultor/EncuentraTodos")
-    public List<Agricultor> getAllAgricultor (){
-        return AgricultorServices.getAllAgricultor();
-    }
     
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
-    @PostMapping(value="Agricultor/CrearAgricultor")
-    public Agricultor crearAgricultor(@RequestBody AgricultorDto dto) throws Exception{
-        return AgricultorServices.crearAgricultor(dto);
+    @PostMapping(value="Agricultor/RegistrarParcialidad")
+    public String crearAgricultor(@RequestBody AgricultorDto dto) throws Exception{
+        return AgricultorServices.registrarParcialidad(dto);
     }
 }

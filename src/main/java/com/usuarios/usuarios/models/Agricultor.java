@@ -8,6 +8,8 @@ package com.usuarios.usuarios.models;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,127 +20,147 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Agricultor", schema="public")
 public class Agricultor {
-    private String nit;
-    private String nombre_comercial;
-    private String contrasena;
-    private String correo;
-    private Integer edad;
-    private String telefono;
-    private String direccion;
-    private String estado;
-    private Date fecha_inscripcion;
-    private Date fecha_modificacion;
+    private Integer cuenta;
+    private Integer id_parcialidad; 
+    private String  usuario;
+    private String matricula;
+    private String numero_licencia;
+    private String peso_de_envio;
+    private Date fecha_creacion;
+    private Date fecha_entrega;
+    private String usuario_recibio;
+    private boolean ba1;
+    private Integer ba2;
+    private String ba3;
 
     public Agricultor() {
     }
 
-    public Agricultor(String nit, String nombre_comercial, String contrasena, String correo, Integer edad, String telefono, String direccion, String estado, Date fecha_inscripcion, Date fecha_modificacion) {
-        this.nit = nit;
-        this.nombre_comercial = nombre_comercial;
-        this.contrasena = contrasena;
-        this.correo = correo;
-        this.edad = edad;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.estado = estado;
-        this.fecha_inscripcion = fecha_inscripcion;
-        this.fecha_modificacion = fecha_modificacion;
+    public Agricultor(Integer id_parcialidad, Integer cuenta, String usuario, String matricula, String numero_licencia, String peso_de_envio, Date fecha_creacion, Date fecha_entrega, String usuario_recibio, boolean ba1, Integer ba2, String ba3) {
+        this.id_parcialidad = id_parcialidad;
+        this.cuenta = cuenta;
+        this.usuario = usuario;
+        this.matricula = matricula;
+        this.numero_licencia = numero_licencia;
+        this.peso_de_envio = peso_de_envio;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_entrega = fecha_entrega;
+        this.usuario_recibio = usuario_recibio;
+        this.ba1 = ba1;
+        this.ba2 = ba2;
+        this.ba3 = ba3;
     }
 
     @Id
-    @Column (name="nit", length=50)
-    public String getNit() {
-        return nit;
+    @Column (name="id_parcialidad")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getId_parcialidad() {
+        return id_parcialidad;
     }
 
-    @Column (name="nombre_comercial", length=50)
-    public String getNombre_comercial() {
-        return nombre_comercial;
+    @Column (name="cuenta")
+    public Integer getCuenta() {
+        return cuenta;
+    }
+    
+    @Column (name="usuario")
+    public String getUsuario() {
+        return usuario;
     }
 
-   
-
-    @Column (name="contrasena", length=50)
-    public String getContrasena() {
-        return contrasena;
+    @Column (name="matricula")
+    public String getMatricula() {
+        return matricula;
     }
 
-    @Column (name="correo", length=50)
-    public String getCorreo() {
-        return correo;
+    @Column (name="numero_licencia")
+    public String getNumero_licencia() {
+        return numero_licencia;
     }
 
-    @Column (name="edad")
-    public Integer getEdad() {
-        return edad;
+    @Column (name="peso_de_envio")
+    public String getPeso_de_envio() {
+        return peso_de_envio;
     }
 
-    @Column (name="telefono", length=50)
-    public String getTelefono() {
-        return telefono;
+    @Column (name="fecha_creacion")
+    public Date getFecha_creacion() {
+        return fecha_creacion;
     }
 
-    @Column (name="direccion", length=50)
-    public String getDireccion() {
-        return direccion;
+    @Column (name="fecha_entrega")
+    public Date getFecha_entrega() {
+        return fecha_entrega;
     }
 
-    @Column (name="estado", length=50)
-    public String getEstado() {
-        return estado;
+    @Column (name="usuario_recibio")
+    public String getUsuario_recibio() {
+        return usuario_recibio;
     }
 
-    @Column (name="fecha_inscripcion")
-    public Date getFecha_inscripcion() {
-        return fecha_inscripcion;
+    @Column (name="ba1")
+    public boolean isBa1() {
+        return ba1;
     }
 
-    @Column (name="fecha_modificacion")
-    public Date getFecha_modificacion() {
-        return fecha_modificacion;
+    @Column (name="ba2")
+    public Integer getBa2() {
+        return ba2;
     }
 
-    public void setNit(String nit) {
-        this.nit = nit;
+    @Column (name="ba3")
+    public String getBa3() {
+        return ba3;
     }
 
-    public void setNombre_comercial(String nombre_comercial) {
-        this.nombre_comercial = nombre_comercial;
+    public void setId_parcialidad(Integer id_parcialidad) {
+        this.id_parcialidad = id_parcialidad;
     }
 
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setCuenta(Integer cuenta) {
+        this.cuenta = cuenta;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
-    public void setEdad(Integer edad) {
-        this.edad = edad;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setNumero_licencia(String numero_licencia) {
+        this.numero_licencia = numero_licencia;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setPeso_de_envio(String peso_de_envio) {
+        this.peso_de_envio = peso_de_envio;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
     }
 
-    public void setFecha_inscripcion(Date fecha_inscripcion) {
-        this.fecha_inscripcion = fecha_inscripcion;
+    public void setFecha_entrega(Date fecha_entrega) {
+        this.fecha_entrega = fecha_entrega;
     }
 
-    public void setFecha_modificacion(Date fecha_modificacion) {
-        this.fecha_modificacion = fecha_modificacion;
+    public void setUsuario_recibio(String usuario_recibio) {
+        this.usuario_recibio = usuario_recibio;
+    }
+
+    public void setBa1(boolean ba1) {
+        this.ba1 = ba1;
+    }
+
+    public void setBa2(Integer ba2) {
+        this.ba2 = ba2;
+    }
+
+    public void setBa3(String ba3) {
+        this.ba3 = ba3;
     }
     
     
-    
+ 
 }

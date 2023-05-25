@@ -18,15 +18,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class AgricultorDto {
-    private String nit;
-    private String nombre_comercial;
-    private String contrasena;
-    private String correo;
-    private Integer edad;
-    private String telefono;
-    private String direccion;
-    //private String estado;
-    //private Date fecha_inscripcion;
-    //private Date fecha_modificacion;
+   // private Integer id_parcialidad;
+    private Integer cuenta;
+    private String  usuario;
+    private String matricula;
+    private String numero_licencia;
+    private String peso_de_envio;
+    //private Date fecha_creacion;
+    //private Date fecha_entrega;
+    //private String usuario_recibio;
+    //private boolean ba1;
+    //private Integer ba2;
+    //private String ba3;
+    
     
 }

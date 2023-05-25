@@ -9,10 +9,11 @@ import com.usuarios.usuarios.models.Agricultor;
 import com.usuarios.usuarios.models.Cuenta;
 import com.usuarios.usuarios.models.pesajePesoCabal;
 import java.util.List;
-import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -25,7 +26,9 @@ public interface CuentaRepositories extends CrudRepository<Cuenta,Integer> {
     
     
     
-    //@Query(value = "select * from cuenta where id_cuenta= :id_cuenta", nativeQuery = true)
-    //@Transactional
-    //public List<Cuenta>consultarCuenta(@Param("id_cuenta") Integer id_cuenta);
+    @Query(value = "select * from cuenta where id_cuenta= :idCuenta", nativeQuery = true)
+    @Transactional(readOnly=true)
+    public List<Cuenta>consultarCuenta(@Param("idCuenta") Integer idCuenta);
+    
+    
 }
