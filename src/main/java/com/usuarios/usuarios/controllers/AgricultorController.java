@@ -6,6 +6,7 @@
 package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.AgricultorDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Agricultor;
 import com.usuarios.usuarios.services.AgricultorServices;
 import java.util.List;
@@ -29,7 +30,7 @@ public class AgricultorController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Agricultor/RegistrarParcialidad")
-    public String crearAgricultor(@RequestBody AgricultorDto dto) throws Exception{
+    public mensajeDto crearAgricultor(@RequestBody AgricultorDto dto) throws Exception{
         return AgricultorServices.registrarParcialidad(dto);
     }
 }

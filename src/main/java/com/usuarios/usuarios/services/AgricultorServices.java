@@ -6,6 +6,7 @@
 package com.usuarios.usuarios.services;
 
 import com.usuarios.usuarios.Dto.AgricultorDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Agricultor;
 import com.usuarios.usuarios.models.Cuenta;
 import com.usuarios.usuarios.repositories.AgricultorRepositories;
@@ -46,8 +47,9 @@ public class AgricultorServices {
     private Integer generadas;
     
     @Transactional
-    public String registrarParcialidad(AgricultorDto dto) throws Exception {
+    public mensajeDto registrarParcialidad(AgricultorDto dto) throws Exception {
         java.util.Date fecha = new Date();
+        mensajeDto mensaje = new mensajeDto();
         final Agricultor Agricultor = new Agricultor();
         Agricultor.setCuenta(dto.getCuenta());
         Agricultor.setUsuario(dto.getUsuario());
@@ -64,14 +66,16 @@ public class AgricultorServices {
         if (parcialidades != null) {
             this.parcialidadesCuenta = parcialidades;
         } else {
-            return "Operacion fallida, verifique numero de parcialidades.";
+            mensaje.setMensaje("Operacion fallida, verifique numero de parcialidades.");
+            return mensaje;
         }
         
         Integer gen = AgricultorRepositories.consultarGen(dto.getCuenta());
         if (gen != null) {
             this.generadas = gen;
         } else {
-            return "Operacion fallida, verifique parcialidades generdas.";
+            mensaje.setMensaje("Operacion fallida, verifique parcialidades generdas.");
+            return mensaje;
         }
         //Inician validaciones para la parcialidad.
         if (this.consultarCuenta(dto.getCuenta())) {
@@ -90,7 +94,8 @@ public class AgricultorServices {
                         }
                     }
                     if (placa_encontrada == null || placa_encontrada == "") {
-                        return "Placa no tiene registro";
+                        mensaje.setMensaje("Placa no tiene registro");
+                        return mensaje;
                     } else {
                         Integer estado_matricula = AgricultorRepositories.consultarestadoMatricula(placa_encontrada);
                         if (estado_matricula != null) {
@@ -122,59 +127,78 @@ public class AgricultorServices {
                                                                         Integer registroPar = AgricultorRepositories.actualizaPar(dto.getCuenta());
                                                                         if (registroPar > 0) {
                                                                             AgricultorRepositories.save(Agricultor);
-                                                                            return "Parcialidad Registrada con exito";
+                                                                            mensaje.setMensaje("Parcialidad Registrada con exito");
+                                                                            return mensaje;
                                                                         } else {
-                                                                            return "Se produjo un error al realizar la actualizacion de cuenta.";
+                                                                            mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
+                                                                            return mensaje;
                                                                         }  
                                                                     } else {
-                                                                        return "El Transportista esta asignada a otro envío";
+                                                                        mensaje.setMensaje("El Transportista esta asignada a otro envío");
+                                                                        return mensaje;
                                                                     }
                                                                 } else {
-                                                                    return "No se puede asignar este vehiculo, no se obtuvo la disponibilidad.";
+                                                                    mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvo la disponibilidad.");
+                                                                    return mensaje;
                                                                 }
                                                             } else {
-                                                                return "Transportista no pertenece al Agricultor";
+                                                                mensaje.setMensaje("Transportista no pertenece al Agricultor");
+                                                                return mensaje;
                                                             }
                                                         } else {
-                                                            return "No puede asignarse este Transportista, no se obtuvieron datos.";
+                                                            mensaje.setMensaje("No puede asignarse este Transportista, no se obtuvieron datos.");
+                                                            return mensaje;
                                                         }
                                                     } else {
-                                                        return "El transportista no puede asignarse por estar inactivo.";
+                                                        mensaje.setMensaje("El transportista no puede asignarse por estar inactivo.");
+                                                        return mensaje;
                                                     }
                                                 } else {
-                                                    return "No se puede asignar este al Transportista, no se obtuvieron datos.";
+                                                    mensaje.setMensaje("No se puede asignar este al Transportista, no se obtuvieron datos.");
+                                                    return mensaje;
                                                 }
                                             } else {
-                                                return "La matricula esta asignada a otro envío";
+                                                mensaje.setMensaje("La matricula esta asignada a otro envío");
+                                                return mensaje;
                                             }
                                         } else {
-                                            return "No se puede asignar este vehiculo, no se obtuvo disponibilidad.";
+                                            mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvo disponibilidad.");
+                                            return mensaje;
                                         }
                                     } else {
-                                        return "La matricula no pertenece al usuario";
+                                        mensaje.setMensaje("La matricula no pertenece al usuario");
+                                        return mensaje;
                                     }
                                 } else {
-                                    return "No se puede asignar este vehiculo, no se obtuvieron datos.";
+                                    mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvieron datos.");
+                                    return mensaje;
                                 }
                             } else {
-                                return "El transporte no puede asignarse por estar inactivo.";
+                                mensaje.setMensaje("El transporte no puede asignarse por estar inactivo.");
+                                return mensaje;
                             }
                         } else {
-                            return "No se puede asignar este vehiculo, no se obtuvieron datos.";
+                            mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvieron datos.");
+                            return mensaje;
                         }
                     }
                 } else {
-                    return "No se obtuvieron datos de las placas ingresadas";  //Se verifican que no hay registro de matriculas en la cuenta.
+                    mensaje.setMensaje("No se obtuvieron datos de las placas ingresadas");
+                    return mensaje;  //Se verifican que no hay registro de matriculas en la cuenta.
                 }
             } else {
-                return "El usuario no tiene asignado esta cuenta.";  //Se verifica que el usuario de la cuenta ingresada no es el correcto
+                mensaje.setMensaje("El usuario no tiene asignado esta cuenta.");
+                return mensaje;  //Se verifica que el usuario de la cuenta ingresada no es el correcto
             }}else{
-                return "No se permite el ingreso de mas parcialidades para esta cuenta";
+                mensaje.setMensaje("No se permite el ingreso de mas parcialidades para esta cuenta");
+                return mensaje;
             }}else{
-                return "La cuenta ya no permite mas registro de parcialidades";
+                mensaje.setMensaje("La cuenta ya no permite mas registro de parcialidades");
+                return mensaje;
             }
         } else {
-            return "No se obtuvieron datos de la cuenta";  //Si la cuenta no existe
+            mensaje.setMensaje("No se obtuvieron datos de la cuenta");
+            return mensaje;  //Si la cuenta no existe
         }
     }
     
