@@ -60,6 +60,9 @@ public class BeneficioServices {
                     if (lic != null) {
                         if (lic.equals(activo)) {
                             mensaje.setMensaje(" El ingreso es permitido");
+                            
+                            int actualizarEstado = BeneficioRepositories.actualizaE(cuenta, fecha);
+                            
                             return mensaje;
                         } else {
                             mensaje.setMensaje("El transportista no tiene permitido el ingreso.  ");

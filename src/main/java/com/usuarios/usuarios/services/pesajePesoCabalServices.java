@@ -24,6 +24,8 @@ import java.util.Map;
 public class pesajePesoCabalServices { 
     private String creada= "Cuenta Creada";
     private String completada= "Pesaje Finalizado";
+    private String confirmada = "Cuenta Confirmada";
+    private String cerrada = "Cuenta Cerrada";
     private String id_cuenta;
     private String estado_cuenta;
     private Integer peso_total_de_envio;
@@ -69,7 +71,7 @@ public class pesajePesoCabalServices {
             return mensaje;
         } else {
             this.consultarCuenta(cuenta);
-            if(this.estado_cuenta.equals(this.creada) || this.estado_cuenta.equals(this.completada)){
+            if(this.estado_cuenta.equals(this.creada) || this.estado_cuenta.equals(this.completada) || this.estado_cuenta.equals(this.confirmada )|| this.estado_cuenta.equals(this.cerrada )){
                 mensaje.setMensaje("No se permite registrar el pesaje.  Estado de la cuenta: "+ this.estado_cuenta);
                 return mensaje;
             }else{
@@ -101,9 +103,21 @@ public class pesajePesoCabalServices {
                                     if (this.numero_pesajes_registrados == 0) {
                                         this.completado = pesajePesoCabalRepositories.actualizaPrimerPeso(cuenta);
                                         if (this.completado > 0) {
-                                            pesajePesoCabalRepositories.save(pesajePesoCabal);
-                                            mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada a pesaje iniciado");
-                                            return mensaje;
+                                            int modmatri = this.pesajePesoCabalRepositories.actualizaDisTransporte(dto.getMatricula());
+                                            if (modmatri > 0) {
+                                                int modlic = this.pesajePesoCabalRepositories.actualizaDisLic(dto.getNumero_licencia());
+                                                if (modmatri > 0) {
+                                                    pesajePesoCabalRepositories.save(pesajePesoCabal);
+                                                    mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada ");
+                                                    return mensaje;
+                                                } else {
+                                                    mensaje.setMensaje("Ocurrio un error al actuaizar disponibilidad del Transportista.");
+                                                    return mensaje;
+                                                }
+                                            } else {
+                                                mensaje.setMensaje("Ocurrio un error al actuaizar disponibilidad del Transporte.");
+                                                return mensaje;
+                                            }
                                         } else {
                                             mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
                                             return mensaje;
@@ -117,8 +131,7 @@ public class pesajePesoCabalServices {
                                     } else if (this.numero_pesajes_registrados > 0 && this.numero_pesajes_registrados <= this.numero_parcialidades - 2) {
                                         this.completado = pesajePesoCabalRepositories.actualizaNumeroParcialidades(cuenta);
                                         if (this.completado > 0) {
-                                            pesajePesoCabalRepositories.save(pesajePesoCabal);
-                                            mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada ");
+                                            mensaje.setMensaje("Pesaje y Cuenta actualizados correctamente.");
                                             return mensaje;
                                         } else {
                                             mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");

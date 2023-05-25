@@ -50,4 +50,16 @@ public interface pesajePesoCabalRepositories extends CrudRepository<pesajePesoCa
     @Query(value = "update cuenta set  estado_cuenta= 'Pesaje Finalizado',numero_pesajes_registrados=numero_pesajes_registrados+1 where id_cuenta=:pid_cuenta", nativeQuery = true)
     public int actualizaUltimoPesaje(@Param("pid_cuenta") Integer pid_cuenta);
     
+    @Transactional
+    @Modifying(flushAutomatically = true)
+    @Query(value = "update transporte set  disponibilidad=true where matricula=:plic", nativeQuery = true)
+    public int actualizaDisTransporte(@Param("plic") String lic);
+    
+    @Transactional
+    @Modifying(flushAutomatically = true)
+    @Query(value = "update transportista set  disponibilidad=true where numero_licencia=:plic", nativeQuery = true)
+    public int actualizaDisLic(@Param("plic") String lic);
+    
+    
+    
 }

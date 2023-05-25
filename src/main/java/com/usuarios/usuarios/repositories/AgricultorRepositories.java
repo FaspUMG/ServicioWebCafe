@@ -64,4 +64,14 @@ public interface AgricultorRepositories extends CrudRepository<Agricultor,Intege
     @Query(value = "update cuenta set parcialidades_generadas=parcialidades_generadas+1 where id_cuenta= :pid_cuenta", nativeQuery = true)
     public int actualizaPar(@Param("pid_cuenta") Integer pid_cuenta);
     
+    @Transactional
+    @Modifying(flushAutomatically = true)
+    @Query(value = "update transporte set  disponibilidad=false where matricula=:plic", nativeQuery = true)
+    public int actualizaDisTransporte(@Param("plic") String lic);
+    
+    @Transactional
+    @Modifying(flushAutomatically = true)
+    @Query(value = "update transportista set  disponibilidad=false where numero_licencia=:plic", nativeQuery = true)
+    public int actualizaDisLic(@Param("plic") String lic);
+    
 }

@@ -66,7 +66,7 @@ public class AgricultorServices {
         if (parcialidades != null) {
             this.parcialidadesCuenta = parcialidades;
         } else {
-            mensaje.setMensaje("Operacion fallida, verifique numero de parcialidades.");
+            mensaje.setMensaje("Operacion fallida, no se obtuvo informacion de la cuenta.");
             return mensaje;
         }
         
@@ -74,7 +74,7 @@ public class AgricultorServices {
         if (gen != null) {
             this.generadas = gen;
         } else {
-            mensaje.setMensaje("Operacion fallida, verifique parcialidades generdas.");
+            mensaje.setMensaje("Operacion fallida, No se obtuvo informacion de la Cuenta  ");
             return mensaje;
         }
         //Inician validaciones para la parcialidad.
@@ -94,7 +94,7 @@ public class AgricultorServices {
                         }
                     }
                     if (placa_encontrada == null || placa_encontrada == "") {
-                        mensaje.setMensaje("Placa no tiene registro");
+                        mensaje.setMensaje("Operacion fallida, no hay registro del Transporte.");
                         return mensaje;
                     } else {
                         Integer estado_matricula = AgricultorRepositories.consultarestadoMatricula(placa_encontrada);
@@ -126,15 +126,27 @@ public class AgricultorServices {
                                                                     if (liDis == "true") {
                                                                         Integer registroPar = AgricultorRepositories.actualizaPar(dto.getCuenta());
                                                                         if (registroPar > 0) {
-                                                                            AgricultorRepositories.save(Agricultor);
-                                                                            mensaje.setMensaje("Parcialidad Registrada con exito");
-                                                                            return mensaje;
+                                                                            int modmatri = this.AgricultorRepositories.actualizaDisTransporte(dto.getMatricula());
+                                                                            if (modmatri > 0) {
+                                                                                int modlic = this.AgricultorRepositories.actualizaDisLic(dto.getNumero_licencia());
+                                                                                if (modmatri > 0) {
+                                                                                    AgricultorRepositories.save(Agricultor);
+                                                                                    mensaje.setMensaje("Parcialidad Registrada con exito");
+                                                                                    return mensaje;
+                                                                                } else {
+                                                                                    mensaje.setMensaje("Ocurrio un error al actualizar disponibilidad del Transportista.");
+                                                                                    return mensaje;
+                                                                                }
+                                                                            } else {
+                                                                                mensaje.setMensaje("Ocurrio un error al actualizar disponibilidad del Transporte.");
+                                                                                return mensaje;
+                                                                            }
                                                                         } else {
                                                                             mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
                                                                             return mensaje;
-                                                                        }  
+                                                                        }
                                                                     } else {
-                                                                        mensaje.setMensaje("El Transportista esta asignada a otro envío");
+                                                                        mensaje.setMensaje("El Transportista esta asignado a otro envío");
                                                                         return mensaje;
                                                                     }
                                                                 } else {
