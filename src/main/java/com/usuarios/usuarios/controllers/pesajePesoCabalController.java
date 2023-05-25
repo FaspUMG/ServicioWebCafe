@@ -1,6 +1,7 @@
 
 package com.usuarios.usuarios.controllers;
 
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.Dto.pesajePesoCabalDto;
 import com.usuarios.usuarios.models.Transportista;
 import com.usuarios.usuarios.models.pesajePesoCabal;
@@ -28,7 +29,7 @@ public class pesajePesoCabalController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="pesajePesoCabal/createPesaje")
-    public String createPesaje(@RequestBody pesajePesoCabalDto dto){
+    public mensajeDto createPesaje(@RequestBody pesajePesoCabalDto dto){
         return pesajePesoCabalServices.createPesaje(dto);
     }
 }

@@ -6,6 +6,7 @@
 package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.BeneficioDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.services.BeneficioServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +27,7 @@ public class BeneficioController {
     
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Beneficio/RegistrarIngreso")
-    public String registrarIngreso(@RequestBody BeneficioDto dto){
+    public mensajeDto registrarIngreso(@RequestBody BeneficioDto dto){
         return BeneficioServices.registrarIngreso(dto);
     }
     

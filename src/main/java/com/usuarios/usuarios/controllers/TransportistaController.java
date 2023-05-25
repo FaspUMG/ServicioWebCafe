@@ -1,6 +1,7 @@
 package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.TransportistaDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Transportista;
 import com.usuarios.usuarios.services.TransportistaServices;
 import java.util.List;
@@ -26,7 +27,7 @@ public class TransportistaController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transportista/InscribirTransportista")
-    public String InscribirTransportista(@RequestBody TransportistaDto dto) throws Exception {
+    public mensajeDto InscribirTransportista(@RequestBody TransportistaDto dto) throws Exception {
         return TransportistaServices.InscribirTransportista(dto);
     }
     

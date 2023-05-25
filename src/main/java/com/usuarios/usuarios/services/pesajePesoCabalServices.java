@@ -2,6 +2,7 @@
 package com.usuarios.usuarios.services;
 
 import com.usuarios.usuarios.Dto.CuentaDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.Dto.pesajePesoCabalDto;
 import com.usuarios.usuarios.models.Cuenta;
 import com.usuarios.usuarios.models.pesajePesoCabal;
@@ -45,8 +46,9 @@ public class pesajePesoCabalServices {
     }
     
     @Transactional
-    public String createPesaje(pesajePesoCabalDto dto) {
+    public mensajeDto createPesaje(pesajePesoCabalDto dto) {
         java.util.Date fecha = new Date();
+        mensajeDto mensaje = new mensajeDto();
         final pesajePesoCabal pesajePesoCabal = new pesajePesoCabal();
         pesajePesoCabal.setId_cuenta(dto.getId_cuenta());
         pesajePesoCabal.setMatricula(dto.getMatricula());
@@ -63,11 +65,13 @@ public class pesajePesoCabalServices {
         String placa = dto.getMatricula();
         String licencia = dto.getNumero_licencia();
         if (dto.getPeso_marcado() <= dto.getPeso_de_camion()) {
-            return "El pesaje marcado no puede ser menor al peso del camion.";
+            mensaje.setMensaje("El pesaje marcado no puede ser menor al peso del camion.");
+            return mensaje;
         } else {
             this.consultarCuenta(cuenta);
             if(this.estado_cuenta.equals(this.creada) || this.estado_cuenta.equals(this.completada)){
-                return "No se permite registrar el pesaje.  Estado de la cuenta: "+ this.estado_cuenta;
+                mensaje.setMensaje("No se permite registrar el pesaje.  Estado de la cuenta: "+ this.estado_cuenta);
+                return mensaje;
             }else{
                 System.out.println("El estado actual de la cuenta es: "+this.estado_cuenta);
             if (id.equals(this.id_cuenta)) {
@@ -98,51 +102,66 @@ public class pesajePesoCabalServices {
                                         this.completado = pesajePesoCabalRepositories.actualizaPrimerPeso(cuenta);
                                         if (this.completado > 0) {
                                             pesajePesoCabalRepositories.save(pesajePesoCabal);
-                                            return "Pesaje Almacenado con exito y Cuenta actualizada a pesaje iniciado";
+                                            mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada a pesaje iniciado");
+                                            return mensaje;
                                         } else {
-                                            return "Se produjo un error al realizar la actualizacion de cuenta.";
+                                            mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
+                                            return mensaje;
                                         }
                                     } else if (this.numero_pesajes_registrados > this.numero_parcialidades) {
-                                        return "no se permiten mas ingresos de los estipulados en cuenta.";
+                                        mensaje.setMensaje("no se permiten mas ingresos de los estipulados en cuenta.");
+                                        return mensaje;
                                     } else if (this.numero_pesajes_registrados == this.numero_parcialidades) {
-                                        return "No se permiten mas pesajes para esta cuenta.";
+                                        mensaje.setMensaje("No se permiten mas pesajes para esta cuenta.");
+                                        return mensaje;
                                     } else if (this.numero_pesajes_registrados > 0 && this.numero_pesajes_registrados <= this.numero_parcialidades - 2) {
                                         this.completado = pesajePesoCabalRepositories.actualizaNumeroParcialidades(cuenta);
                                         if (this.completado > 0) {
                                             pesajePesoCabalRepositories.save(pesajePesoCabal);
-                                            return "Pesaje Almacenado con exito y Cuenta actualizada ";
+                                            mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada ");
+                                            return mensaje;
                                         } else {
-                                            return "Se produjo un error al realizar la actualizacion de cuenta.";
+                                            mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
+                                            return mensaje;
                                         }
                                     } else if (this.numero_pesajes_registrados > 0 && this.numero_pesajes_registrados <= this.numero_parcialidades - 1) {
                                         this.completado = pesajePesoCabalRepositories.actualizaUltimoPesaje(cuenta);
                                         if (this.completado > 0) {
                                             pesajePesoCabalRepositories.save(pesajePesoCabal);
-                                            return "Pesaje Almacenado con exito y Cuenta actualizada ";
+                                            mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada ");
+                                            return mensaje;
                                         } else {
-                                            return "Se produjo un error al realizar la actualizacion de cuenta.";
+                                            mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
+                                            return mensaje;
                                         }
                                     } else {
-                                        return "No se pudo registrar el numero de pesaje";
+                                        mensaje.setMensaje("No se pudo registrar el numero de pesaje");
+                                        return mensaje;
                                     }
                                 } else {
-                                    return "El Transportista no tiene permisos para ingreso de parcialidades en beneficio de café.";
+                                    mensaje.setMensaje("El Transportista no tiene permisos para ingreso de parcialidades en beneficio de café.");
+                                    return mensaje;
                                 }
                             } else {
-                                return "No se encontro registro de la licencia de conducir ingresada.";
+                                mensaje.setMensaje("No se encontro registro de la licencia de conducir ingresada.");
+                                return mensaje;
                             }
                         } else {
                             System.out.println("Matricula no aceptada");
-                            return "La placa del Transporte no tiene permisos para ingreso al beneficio de café.";
+                            mensaje.setMensaje("La placa del Transporte no tiene permisos para ingreso al beneficio de café.");
+                            return mensaje;
                         }
                     } else {
-                        return "No se encontro registro de la Matricula Ingresada";
+                        mensaje.setMensaje("No se encontro registro de la Matricula Ingresada");
+                        return mensaje;
                     }
                 } else {
-                    return "La cuenta no esta asociada al Usuario Agricultor Ingresado";
+                    mensaje.setMensaje("La cuenta no esta asociada al Usuario Agricultor Ingresado");
+                    return mensaje;
                 }
             } else {
-                return "El numero Id de cuenta ingresado no existe en los registros de Productores de café";
+                mensaje.setMensaje("El numero Id de cuenta ingresado no existe en los registros de Productores de café");
+                return mensaje;
             }
             }
         }

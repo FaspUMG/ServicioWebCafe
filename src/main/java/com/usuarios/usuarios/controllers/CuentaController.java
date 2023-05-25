@@ -6,6 +6,7 @@
 package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.CuentaDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Cuenta;
 import com.usuarios.usuarios.models.Transportista;
 import com.usuarios.usuarios.services.CuentaServices;
@@ -38,7 +39,7 @@ public class CuentaController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Cuenta/CrearCuenta")
-    public String crearAgricultor(@RequestBody CuentaDto dto) throws Exception{
+    public mensajeDto crearAgricultor(@RequestBody CuentaDto dto) {
         return CuentaServices.crearCuenta(dto);
     }
     

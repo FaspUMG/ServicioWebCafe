@@ -2,6 +2,7 @@
 package com.usuarios.usuarios.services;
 
 import com.usuarios.usuarios.Dto.TransporteDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Transporte;
 import com.usuarios.usuarios.repositories.TransporteRepositories;
 import java.util.Base64;
@@ -33,8 +34,9 @@ public class TransporteServices {
     }
 
     @Transactional
-    public String InscribirTransporte(TransporteDto dto) throws Exception {
+    public mensajeDto InscribirTransporte(TransporteDto dto) throws Exception {
         java.util.Date fecha = new Date();
+        mensajeDto mensaje = new mensajeDto();
         final Transporte Transporte = new Transporte();
         Transporte.setMatricula(dto.getMatricula());
         Transporte.setModelo(dto.getModelo());
@@ -50,30 +52,38 @@ public class TransporteServices {
         Transporte.setEstado(1020);
             if (dto.getModelo() >= 1960) {
                 TransporteRepositories.save(Transporte);
-                return "Transporte Inscrito Correctamente en el beneficio";
+                mensaje.setMensaje("Transporte Inscrito Correctamente en el beneficio");
+                return mensaje;
             } else {
-                return "El Transporte debe ser modelo 1960 o mas reciente";
+                mensaje.setMensaje("El Transporte debe ser modelo 1960 o mas reciente");
+                return mensaje;
             } 
     }
 
-    public String consultarTransporte(TransporteDto dto) throws Exception {
+    public mensajeDto consultarTransporte(TransporteDto dto) throws Exception {
         String pMatricula = dto.getMatricula();
+        mensajeDto mensaje = new mensajeDto();
         String matricula = this.TransporteRepositories.consultaTransporte(pMatricula);
         if (matricula == null || matricula.equals("")) {
-            return "No se Obtuvieron datos del Transporte ingresado";
+            mensaje.setMensaje("No se Obtuvieron datos del Transporte ingresado");
+            return mensaje;
         } else {
             switch(matricula){
                 case "1028":
-                    return "El vehiculo con las placas: "+pMatricula+" se encuentra Inactivo";
+                    mensaje.setMensaje("El vehiculo con las placas: "+pMatricula+" se encuentra Inactivo");
+                    return mensaje;
                     
                 case "1020":
-                    return "El vehiculo con las placas: "+pMatricula+" se encuentra Activo";
+                    mensaje.setMensaje("El vehiculo con las placas: "+pMatricula+" se encuentra Activo");
+                    return mensaje;
                     
                 case "1030":
-                    return "El vehiculo con las placas: "+pMatricula+" se encuentra Eliminado";
+                    mensaje.setMensaje("El vehiculo con las placas: "+pMatricula+" se encuentra Eliminado");
+                    return mensaje;
                     
                 default :
-                      return  "No se obtuvo el estado del vehiculo con las placas: "+pMatricula;
+                    mensaje.setMensaje("No se obtuvo el estado del vehiculo con las placas: "+pMatricula);
+                      return  mensaje;
             }
         }  
     }
@@ -99,14 +109,17 @@ public class TransporteServices {
     }
     
     //Metodo para eliminar Transporte activo o inactivo por medio del numero de matriculas.
-    public String eliminarTransporte(TransporteDto dto) throws Exception { 
+    public mensajeDto eliminarTransporte(TransporteDto dto) throws Exception { 
         
         String pMatricula = dto.getMatricula(); 
+        mensajeDto mensaje = new mensajeDto();
             int matricula = this.TransporteRepositories.eliminaTransporte(pMatricula);
             if (matricula > 0) {
-                return "El transporte con las placas: "+pMatricula+" fue eliminado con exito";
+                mensaje.setMensaje("El transporte con las placas: "+pMatricula+" fue eliminado con exito");
+                return mensaje;
             } else {
-                return "Error al eliminar el transporte con las placas: "+pMatricula+"";
+                mensaje.setMensaje("Error al eliminar el transporte con las placas: "+pMatricula+"");
+                return mensaje;
             } 
     }
     

@@ -6,6 +6,7 @@
 package com.usuarios.usuarios.services;
 
 import com.usuarios.usuarios.Dto.BeneficioDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Beneficio;
 import com.usuarios.usuarios.repositories.BeneficioRepositories;
 import com.usuarios.usuarios.repositories.pesajePesoCabalRepositories;
@@ -34,8 +35,9 @@ public class BeneficioServices {
     private String disponibilidad;
     
     @Transactional
-    public String registrarIngreso(BeneficioDto dto) {
+    public mensajeDto registrarIngreso(BeneficioDto dto) {
         java.util.Date fecha = new Date();
+        mensajeDto mensaje =  new mensajeDto();
         final Beneficio Beneficio = new Beneficio();
         Beneficio.setId_cuenta(dto.getId_cuenta());
         Beneficio.setUsuario_agricultor(dto.getUsuario_agricultor());
@@ -57,24 +59,31 @@ public class BeneficioServices {
                     String lic = BeneficioRepositories.consultarLicencia(licencia, user);
                     if (lic != null) {
                         if (lic.equals(activo)) {
-                            return " El ingreso es permitido";
+                            mensaje.setMensaje(" El ingreso es permitido");
+                            return mensaje;
                         } else {
-                            return "El transportista no tiene permitido el ingreso.  ";
+                            mensaje.setMensaje("El transportista no tiene permitido el ingreso.  ");
+                            return mensaje;
                         }
                     } else {
-                        return "No se obtuvieron datos del Transportista";
+                        mensaje.setMensaje("No se obtuvieron datos del Transportista");
+                        return mensaje;
                     }
                 } else {
-                    return "La matricula del Transporte no tiene permitido el ingreso. ";
+                    mensaje.setMensaje("La matricula del Transporte no tiene permitido el ingreso. ");
+                    return mensaje;
                 }
             } else {
-                return "No se obtuvieron datos del Transporte.";
+                mensaje.setMensaje("No se obtuvieron datos del Transporte.");
+                return mensaje;
             }
         } else {
-            return "El usuario no tiene asignado el numero de cuenta ingresado. ";
+            mensaje.setMensaje("El usuario no tiene asignado el numero de cuenta ingresado. ");
+            return mensaje;
         }
         }else{
-            return "No se obtuvieron datos de la cuenta";
+            mensaje.setMensaje("No se obtuvieron datos de la cuenta");
+            return mensaje;
         }
     }
     

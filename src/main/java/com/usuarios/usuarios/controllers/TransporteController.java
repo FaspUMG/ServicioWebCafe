@@ -2,6 +2,7 @@
 package com.usuarios.usuarios.controllers;
 
 import com.usuarios.usuarios.Dto.TransporteDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Transporte;
 import com.usuarios.usuarios.services.TransporteServices;
 import java.util.Base64;
@@ -36,21 +37,21 @@ public class TransporteController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transporte/InscribirTransporte")
-    public String InscribirTransporte(@RequestBody TransporteDto dto) throws Exception{
+    public mensajeDto InscribirTransporte(@RequestBody TransporteDto dto) throws Exception{
         return TransporteServices.InscribirTransporte(dto);
     }
      
     //metodo para Concultar un Transporte por medio de la matricula
     @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(value="Transporte/consultaTransporte")
-    public String consultarTransporte(@RequestBody TransporteDto dto)throws Exception{
+    public mensajeDto consultarTransporte(@RequestBody TransporteDto dto)throws Exception{
         return TransporteServices.consultarTransporte(dto);
     }
     
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transporte/eliminarTransporte")
-    public String eliminarTransporte(@RequestBody TransporteDto dto)throws Exception{
+    public mensajeDto eliminarTransporte(@RequestBody TransporteDto dto)throws Exception{
         return TransporteServices.eliminarTransporte(dto);
     }
    

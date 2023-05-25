@@ -16,6 +16,7 @@ com\usuarios\usuarios\UsuariosApplication.class
 com\usuarios\usuarios\controllers\ProductoController.class
 com\usuarios\usuarios\Dto\TransporteDto.class
 com\usuarios\usuarios\models\Cuenta.class
+com\usuarios\usuarios\Dto\mensajeDto.class
 com\usuarios\usuarios\repositories\CuentaRepositories.class
 com\usuarios\usuarios\models\Beneficio.class
 com\usuarios\usuarios\Dto\CuentaDto.class

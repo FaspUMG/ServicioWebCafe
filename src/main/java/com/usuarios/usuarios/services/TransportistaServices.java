@@ -6,6 +6,7 @@
 package com.usuarios.usuarios.services;
 
 import com.usuarios.usuarios.Dto.TransportistaDto;
+import com.usuarios.usuarios.Dto.mensajeDto;
 import com.usuarios.usuarios.models.Transportista;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -44,9 +45,10 @@ public class TransportistaServices {
     }
     
     @Transactional
-   public String InscribirTransportista (TransportistaDto dto) throws Exception{       
+   public mensajeDto InscribirTransportista (TransportistaDto dto) throws Exception{       
         
        final Transportista Transportista = new Transportista ();
+       mensajeDto mensaje = new mensajeDto();
        Transportista.setNumero_licencia(dto.getNumero_licencia());
        Transportista.setNombres(dto.getNombres());
        Transportista.setApellidos(dto.getApellidos());
@@ -58,10 +60,12 @@ public class TransportistaServices {
        if(dto.getTipo_licencia().equals("A")){
            System.out.println("Mostrando el ingreso del usuario_creo: "+dto.getUsuario_creo() );
          TransportistaRepositories.save(Transportista);
-         return "El Transportista fue Inscrito Correctamente en el Beneficio";
+         mensaje.setMensaje("El Transportista fue Inscrito Correctamente en el Beneficio");
+         return mensaje;
            
        }else{
-        return "El Transportista debe tener licencia tipo A";
+           mensaje.setMensaje( "El Transportista debe tener licencia tipo A");
+        return mensaje;
        } 
    }
    
@@ -69,24 +73,30 @@ public class TransportistaServices {
    public String consultaTransportista(TransportistaDto dto) throws Exception{
        
         String pLicencia = dto.getNumero_licencia();
+        mensajeDto mensaje = new mensajeDto();
         String numeroLicencia = this.TransportistaRepositories.consultaTransportista(pLicencia);
         
        if(numeroLicencia==null || numeroLicencia.equals("")){
+           //mensaje.setMensaje("No se obtuvieron los datos del Transportista Ingresado");
        return "No se obtuvieron los datos del Transportista Ingresado";
        }else{
            System.out.println("Los datos son 555555555555555555555555555555555555555555555"+numeroLicencia);
        switch(numeroLicencia){
            
                 case "1028":
+                   // mensaje.setMensaje("El Transportista con el numero de Licencia: "+pLicencia+" se encuentra Inactivo");
                     return "El Transportista con el numero de Licencia: "+pLicencia+" se encuentra Inactivo";
                     
                 case "1020":
+                   // mensaje.setMensaje("El Transportista con el numero de Licencia: "+pLicencia+" se encuentra Activo");
                     return "El Transportista con el numero de Licencia: "+pLicencia+" se encuentra Activo";
                     
                 case "1030":
+                   
                     return "El Transportista con el numero de Licencia: "+pLicencia+" se encuentra Eliminado";
                     
                 default :
+               
                       return  "No se obtuvo el estado del Transportista con el numero de Licencia: "+pLicencia;
             }
        }
