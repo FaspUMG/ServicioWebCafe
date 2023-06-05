@@ -65,11 +65,11 @@ public class pesajePesoCabalServices {
         String id = cuenta.toString();
         String user = dto.getAgricultor();
         String placa = dto.getMatricula();
-        String licencia = dto.getNumero_licencia();
         if (dto.getPeso_marcado() <= dto.getPeso_de_camion()) {
             mensaje.setMensaje("El pesaje marcado no puede ser menor al peso del camion.");
             return mensaje;
         } else {
+            if(this.consultarCuenta(cuenta)){
             this.consultarCuenta(cuenta);
             if(this.estado_cuenta.equals(this.creada) || this.estado_cuenta.equals(this.completada) || this.estado_cuenta.equals(this.confirmada )|| this.estado_cuenta.equals(this.cerrada )){
                 mensaje.setMensaje("No se permite registrar el pesaje.  Estado de la cuenta: "+ this.estado_cuenta);
@@ -96,8 +96,10 @@ public class pesajePesoCabalServices {
                     if (estado_matricula != null) {
                         if (estado_matricula == 1020) {
                             System.out.println("Matricula Aceptada");
-                            Integer estado_Transportista = pesajePesoCabalRepositories.consultarEstadoTransportista(licencia);
+                            Integer estado_Transportista = pesajePesoCabalRepositories.consultarEstadoTransportista(dto.getNumero_licencia());
+                            System.out.println("*********"+estado_Transportista);
                             if (estado_Transportista != null) {
+                                System.out.println("*********"+estado_Transportista);
                                 if (estado_Transportista == 1020) {
                                     System.out.println("Licencia Valida ");
                                     if (this.numero_pesajes_registrados == 0) {
@@ -156,6 +158,7 @@ public class pesajePesoCabalServices {
                                     return mensaje;
                                 }
                             } else {
+                                System.out.println("*********"+estado_Transportista);
                                 mensaje.setMensaje("No se encontro registro de la licencia de conducir ingresada.");
                                 return mensaje;
                             }
@@ -177,10 +180,14 @@ public class pesajePesoCabalServices {
                 return mensaje;
             }
             }
+        }else{
+                mensaje.setMensaje("No hay registros de la cuenta Ingresada");
+            return mensaje;
+            }
         }
     }
     
-    public String consultarCuenta(Integer id_cuenta) {  //Metodo para consultar datos sobre la cuenta ingresada por medio del parametro recibido id_cuenta
+    public Boolean consultarCuenta(Integer id_cuenta) {  //Metodo para consultar datos sobre la cuenta ingresada por medio del parametro recibido id_cuenta
         Integer pid_cuenta = id_cuenta;
         String respuesta = pesajePesoCabalRepositories.consultarCuenta(pid_cuenta);
         if (respuesta != null && respuesta != "") {
@@ -193,9 +200,10 @@ public class pesajePesoCabalServices {
             this.peso_total_de_envio = Integer.parseInt(parts[5]); //peso total enviado en qintales
             System.out.println("Mostrando variables: " + id_cuenta + " " + estado_cuenta + " " + usuario_agricultor + " " + numero_pesajes_registrados + " " + numero_parcialidades + " " + peso_total_de_envio);
             this.matriculas = pesajePesoCabalRepositories.consultarMatriculas(pid_cuenta);
-            return "Mostrando resultado";
+            return true;
         } else {
-            return "no se encontraron los datos de la cuenta";
+            System.out.println("No existe");
+            return false;
         }
     }
 }

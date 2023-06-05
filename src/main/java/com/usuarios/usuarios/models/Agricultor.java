@@ -28,15 +28,15 @@ public class Agricultor {
     private String peso_de_envio;
     private Date fecha_creacion;
     private Date fecha_entrega;
-    private String usuario_recibio;
-    private boolean ba1;
+    private String usuario_concedio_ingreso;
+    private boolean ingreso_en_beneficio;
     private Integer ba2;
-    private String ba3;
+    private String usuario_registro_pesaje;
 
     public Agricultor() {
     }
 
-    public Agricultor(Integer id_parcialidad, Integer cuenta, String usuario, String matricula, String numero_licencia, String peso_de_envio, Date fecha_creacion, Date fecha_entrega, String usuario_recibio, boolean ba1, Integer ba2, String ba3) {
+    public Agricultor(Integer id_parcialidad, Integer cuenta, String usuario, String matricula, String numero_licencia, String peso_de_envio, Date fecha_creacion, Date fecha_entrega, String usuario_concedio_ingreso, boolean ingreso_en_beneficio, Integer ba2, String usuario_registro_pesaje) {
         this.id_parcialidad = id_parcialidad;
         this.cuenta = cuenta;
         this.usuario = usuario;
@@ -45,10 +45,10 @@ public class Agricultor {
         this.peso_de_envio = peso_de_envio;
         this.fecha_creacion = fecha_creacion;
         this.fecha_entrega = fecha_entrega;
-        this.usuario_recibio = usuario_recibio;
-        this.ba1 = ba1;
+        this.usuario_concedio_ingreso = usuario_concedio_ingreso;
+        this.ingreso_en_beneficio = ingreso_en_beneficio;
         this.ba2 = ba2;
-        this.ba3 = ba3;
+        this.usuario_registro_pesaje = usuario_registro_pesaje;
     }
 
     @Id
@@ -93,14 +93,9 @@ public class Agricultor {
         return fecha_entrega;
     }
 
-    @Column (name="usuario_recibio")
-    public String getUsuario_recibio() {
-        return usuario_recibio;
-    }
-
-    @Column (name="ba1")
-    public boolean isBa1() {
-        return ba1;
+    @Column (name="ingreso_en_beneficio")
+    public boolean isIngreso_en_beneficio() {
+        return ingreso_en_beneficio;
     }
 
     @Column (name="ba2")
@@ -108,9 +103,14 @@ public class Agricultor {
         return ba2;
     }
 
-    @Column (name="ba3")
-    public String getBa3() {
-        return ba3;
+    @Column (name="usuario_concedio_ingreso")
+    public String getUsuario_concedio_ingreso() {
+        return usuario_concedio_ingreso;
+    }
+
+    @Column (name="usuario_registro_pesaje")
+    public String getUsuario_registro_pesaje() {
+        return usuario_registro_pesaje;
     }
 
     public void setId_parcialidad(Integer id_parcialidad) {
@@ -145,22 +145,19 @@ public class Agricultor {
         this.fecha_entrega = fecha_entrega;
     }
 
-    public void setUsuario_recibio(String usuario_recibio) {
-        this.usuario_recibio = usuario_recibio;
-    }
-
-    public void setBa1(boolean ba1) {
-        this.ba1 = ba1;
-    }
-
     public void setBa2(Integer ba2) {
         this.ba2 = ba2;
     }
 
-    public void setBa3(String ba3) {
-        this.ba3 = ba3;
+    public void setUsuario_concedio_ingreso(String usuario_concedio_ingreso) {
+        this.usuario_concedio_ingreso = usuario_concedio_ingreso;
     }
-    
-    
- 
+
+    public void setUsuario_registro_pesaje(String usuario_registro_pesaje) {
+        this.usuario_registro_pesaje = usuario_registro_pesaje;
+    }
+
+    public void setIngreso_en_beneficio(boolean ingreso_en_beneficio) {
+        this.ingreso_en_beneficio = ingreso_en_beneficio;
+    }
 }

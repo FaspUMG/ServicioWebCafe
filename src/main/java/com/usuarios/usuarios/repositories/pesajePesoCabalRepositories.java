@@ -24,7 +24,7 @@ public interface pesajePesoCabalRepositories extends CrudRepository<pesajePesoCa
     
    
     @Transactional
-    @Query(value = "select matriculas_autorizadas from cuenta where id_cuenta= :pid_cuenta", nativeQuery = true)
+    @Query(value = "select matriculas_autorizadas from cuenta where id_cuenta=:pid_cuenta", nativeQuery = true)
     public String consultarMatriculas(@Param("pid_cuenta") Integer pid_cuenta);
     
     @Transactional
@@ -32,8 +32,8 @@ public interface pesajePesoCabalRepositories extends CrudRepository<pesajePesoCa
     public Integer consultarestadoMatricula(@Param("matricula_evaluada") String matricula_evaluada);
     
     @Transactional
-    @Query(value = "select estado from transportista where numero_licencia= :licencia", nativeQuery = true)
-    public int consultarEstadoTransportista(@Param("licencia") String licencia);
+    @Query(value = "select estado from transportista where numero_licencia=:licencia", nativeQuery = true)
+    public Integer consultarEstadoTransportista(@Param("licencia") String licencia);
     
     @Transactional
     @Modifying(flushAutomatically = true)

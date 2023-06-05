@@ -60,7 +60,4 @@ public class CuentaServices {
         mensaje.setMensaje("Cuenta Creada Exitosamente, su numero de cuenta es: "+ valor);
         return  mensaje;
     }
-    
-     
-    
 }

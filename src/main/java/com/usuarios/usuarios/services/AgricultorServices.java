@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class AgricultorServices {
-    private static final String clave = "MiClaveSecreta12"; // Clave secreta para encriptar
+    //private static final String clave = "MiClaveSecreta12"; // Clave secreta para encriptar
     
     @Autowired
     AgricultorRepositories AgricultorRepositories;
@@ -56,169 +56,173 @@ public class AgricultorServices {
         Agricultor.setMatricula(dto.getMatricula());
         Agricultor.setNumero_licencia(dto.getNumero_licencia());
         Agricultor.setPeso_de_envio(dto.getPeso_de_envio());
+        Agricultor.setIngreso_en_beneficio(false);
         Agricultor.setFecha_creacion(fecha);
         String placa = dto.getMatricula();
         String placa_encontrada = "";
         
         
-        
-        Integer parcialidades = AgricultorRepositories.consultarPar(dto.getCuenta());
-        if (parcialidades != null) {
-            this.parcialidadesCuenta = parcialidades;
-        } else {
-            mensaje.setMensaje("Operacion fallida, no se obtuvo informacion de la cuenta.");
-            return mensaje;
-        }
-        
-        Integer gen = AgricultorRepositories.consultarGen(dto.getCuenta());
-        if (gen != null) {
-            this.generadas = gen;
-        } else {
-            mensaje.setMensaje("Operacion fallida, No se obtuvo informacion de la Cuenta  ");
-            return mensaje;
-        }
-        //Inician validaciones para la parcialidad.
-        if (this.consultarCuenta(dto.getCuenta())) {
-            if(estado_cuenta!="Pesaje Finalizado"){
-            if(this.generadas < this.parcialidadesCuenta){
-            if (this.usuario_agricultor.equals(dto.getUsuario())) {
-                if (this.matriculas(dto.getCuenta())) { //llamando a metodo y validando matriculas
-                    String[] placas = this.matriculas_autorizadas.split(",");
-                    for (int i = 0; i < placas.length; i++) {
-                        if (placa.equals(placas[i])) {
-                            System.out.println("Mostrando la placa enviada para pesaje: " + placas[i]);
-                            placa_encontrada = placas[i];
-                        } else {
-                            System.out.println("La no hay registro de la placa ingresada");
-                            //Se validad que la placa ingresada no esta registrada.
-                        }
-                    }
-                    if (placa_encontrada == null || placa_encontrada == "") {
-                        mensaje.setMensaje("Operacion fallida, no hay registro del Transporte.");
-                        return mensaje;
-                    } else {
-                        Integer estado_matricula = AgricultorRepositories.consultarestadoMatricula(placa_encontrada);
-                        if (estado_matricula != null) {
-                            if (estado_matricula == 1020) {
-                                System.out.println("Matricula inscrita y Activa");
-                                //return "matricula activa";
-                                String asignacion = AgricultorRepositories.consultarestausuario(placa_encontrada);
-                                if (asignacion != null) {
-                                    if (asignacion.equals(dto.getUsuario())) {
-                                        System.out.println("Matricula pertenece al usuario");
-                                        String disponibilidad = AgricultorRepositories.consultardisponibilidad(placa_encontrada);
-                                        if (disponibilidad != null) {
-                                            System.out.println("disponibilidad****************" + disponibilidad);
-                                            if (disponibilidad == "true") {
-                                                //return "Proceda con la asignacion de vehiculo";
-                                                Integer estado_li = AgricultorRepositories.consultarli(dto.getNumero_licencia());
-                                                if (estado_li != null) {
-                                                    if (estado_li == 1020) {
-                                                        System.out.println("Matricula inscrita y Activa");
-                                                        //return "matricula activa";
-                                                        String liUser = AgricultorRepositories.consultarLiUser(dto.getNumero_licencia());
-                                                        if (liUser != null) {
-                                                            if (liUser.equals(dto.getUsuario())) {
-                                                                System.out.println("Transportista pertenece al usuario");
-                                                                String liDis = AgricultorRepositories.consultarLiDis(dto.getNumero_licencia());
-                                                                if (liDis != null) {
-                                                                    System.out.println("disponibilidad Licencia****************" + liDis);
-                                                                    if (liDis == "true") {
-                                                                        Integer registroPar = AgricultorRepositories.actualizaPar(dto.getCuenta());
-                                                                        if (registroPar > 0) {
-                                                                            int modmatri = this.AgricultorRepositories.actualizaDisTransporte(dto.getMatricula());
-                                                                            if (modmatri > 0) {
-                                                                                int modlic = this.AgricultorRepositories.actualizaDisLic(dto.getNumero_licencia());
-                                                                                if (modmatri > 0) {
-                                                                                    AgricultorRepositories.save(Agricultor);
-                                                                                    mensaje.setMensaje("Parcialidad Registrada con exito");
-                                                                                    return mensaje;
+                Integer parcialidades = AgricultorRepositories.consultarPar(dto.getCuenta());
+                if (parcialidades != null) {
+                    this.parcialidadesCuenta = parcialidades;
+                } else {
+                    mensaje.setMensaje("Operacion fallida, no se obtuvo informacion de la cuenta.");
+                    return mensaje;
+                }
+
+                Integer gen = AgricultorRepositories.consultarGen(dto.getCuenta());
+                if (gen != null) {
+                    this.generadas = gen;
+                } else {
+                    mensaje.setMensaje("Operacion fallida, No se obtuvo informacion de la Cuenta  ");
+                    return mensaje;
+                }
+                //Inician validaciones para la parcialidad.
+                if (this.consultarCuenta(dto.getCuenta())) {
+                    if (estado_cuenta != "Pesaje Finalizado") {
+                        if (this.generadas < this.parcialidadesCuenta) {
+                            if (this.usuario_agricultor.equals(dto.getUsuario())) {
+                                if (this.matriculas(dto.getCuenta())) { //llamando a metodo y validando matriculas
+                                    String[] placas = this.matriculas_autorizadas.split(",");
+                                    for (int i = 0; i < placas.length; i++) {
+                                        if (placa.equals(placas[i])) {
+                                            System.out.println("Mostrando la placa enviada para pesaje: " + placas[i]);
+                                            placa_encontrada = placas[i];
+                                        } else {
+                                            System.out.println("La no hay registro de la placa ingresada");
+                                            //Se validad que la placa ingresada no esta registrada.
+                                        }
+                                    }
+                                    if (placa_encontrada == null || placa_encontrada == "") {
+                                        mensaje.setMensaje("Operacion fallida, no hay registro del Transporte.");
+                                        return mensaje;
+                                    } else {
+                                        Integer estado_matricula = AgricultorRepositories.consultarestadoMatricula(placa_encontrada);
+                                        if (estado_matricula != null) {
+                                            if (estado_matricula == 1020) {
+                                                System.out.println("Matricula inscrita y Activa");
+                                                //return "matricula activa";
+                                                String asignacion = AgricultorRepositories.consultarestausuario(placa_encontrada);
+                                                if (asignacion != null) {
+                                                    if (asignacion.equals(dto.getUsuario())) {
+                                                        System.out.println("Matricula pertenece al usuario");
+                                                        String disponibilidad = AgricultorRepositories.consultardisponibilidad(placa_encontrada);
+                                                        if (disponibilidad != null) {
+                                                            System.out.println("disponibilidad****************" + disponibilidad);
+                                                            if (disponibilidad == "true") {
+                                                                //return "Proceda con la asignacion de vehiculo";
+                                                                Integer estado_li = AgricultorRepositories.consultarli(dto.getNumero_licencia());
+                                                                if (estado_li != null) {
+                                                                    if (estado_li == 1020) {
+                                                                        System.out.println("Matricula inscrita y Activa");
+                                                                        //return "matricula activa";
+                                                                        String liUser = AgricultorRepositories.consultarLiUser(dto.getNumero_licencia());
+                                                                        if (liUser != null) {
+                                                                            if (liUser.equals(dto.getUsuario())) {
+                                                                                System.out.println("Transportista pertenece al usuario");
+                                                                                String liDis = AgricultorRepositories.consultarLiDis(dto.getNumero_licencia());
+                                                                                System.out.println("-/*/*/*/*/*/*/**" + liDis);
+                                                                                if (liDis != null) {
+                                                                                    System.out.println("disponibilidad Licencia****************" + liDis);
+                                                                                    if (liDis != null) {
+                                                                                        Integer registroPar = AgricultorRepositories.actualizaPar(dto.getCuenta());
+                                                                                        if (registroPar > 0) {
+                                                                                            int modmatri = this.AgricultorRepositories.actualizaDisTransporte(dto.getMatricula());
+                                                                                            if (modmatri > 0) {
+                                                                                                int modlic = this.AgricultorRepositories.actualizaDisLic(dto.getNumero_licencia());
+                                                                                                if (modmatri > 0) {
+                                                                                                    AgricultorRepositories.save(Agricultor);
+                                                                                                    mensaje.setMensaje("Parcialidad Registrada con exito");
+                                                                                                    return mensaje;
+                                                                                                } else {
+                                                                                                    mensaje.setMensaje("Ocurrio un error al actualizar disponibilidad del Transportista.");
+                                                                                                    return mensaje;
+                                                                                                }
+                                                                                            } else {
+                                                                                                mensaje.setMensaje("Ocurrio un error al actualizar disponibilidad del Transporte.");
+                                                                                                return mensaje;
+                                                                                            }
+                                                                                        } else {
+                                                                                            mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
+                                                                                            return mensaje;
+                                                                                        }
+                                                                                    } else {
+                                                                                        mensaje.setMensaje("El Transportista esta asignado a otro envío");
+                                                                                        return mensaje;
+                                                                                    }
                                                                                 } else {
-                                                                                    mensaje.setMensaje("Ocurrio un error al actualizar disponibilidad del Transportista.");
+                                                                                    System.out.println("/////" + liDis);
+                                                                                    mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvo la disponibilidad.");
                                                                                     return mensaje;
                                                                                 }
                                                                             } else {
-                                                                                mensaje.setMensaje("Ocurrio un error al actualizar disponibilidad del Transporte.");
+                                                                                mensaje.setMensaje("Transportista no pertenece al Agricultor");
                                                                                 return mensaje;
                                                                             }
                                                                         } else {
-                                                                            mensaje.setMensaje("Se produjo un error al realizar la actualizacion de cuenta.");
+                                                                            mensaje.setMensaje("No puede asignarse este Transportista, no se obtuvieron datos.");
                                                                             return mensaje;
                                                                         }
                                                                     } else {
-                                                                        mensaje.setMensaje("El Transportista esta asignado a otro envío");
+                                                                        mensaje.setMensaje("El transportista no puede asignarse por estar inactivo.");
                                                                         return mensaje;
                                                                     }
                                                                 } else {
-                                                                    mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvo la disponibilidad.");
+                                                                    mensaje.setMensaje("No se puede asignar este al Transportista, no se obtuvieron datos.");
                                                                     return mensaje;
                                                                 }
                                                             } else {
-                                                                mensaje.setMensaje("Transportista no pertenece al Agricultor");
+                                                                mensaje.setMensaje("La matricula esta asignada a otro envío");
                                                                 return mensaje;
                                                             }
                                                         } else {
-                                                            mensaje.setMensaje("No puede asignarse este Transportista, no se obtuvieron datos.");
+                                                            mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvo disponibilidad.");
                                                             return mensaje;
                                                         }
                                                     } else {
-                                                        mensaje.setMensaje("El transportista no puede asignarse por estar inactivo.");
+                                                        mensaje.setMensaje("La matricula no pertenece al usuario");
                                                         return mensaje;
                                                     }
                                                 } else {
-                                                    mensaje.setMensaje("No se puede asignar este al Transportista, no se obtuvieron datos.");
+                                                    mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvieron datos.");
                                                     return mensaje;
                                                 }
                                             } else {
-                                                mensaje.setMensaje("La matricula esta asignada a otro envío");
+                                                mensaje.setMensaje("El transporte no puede asignarse por estar inactivo.");
                                                 return mensaje;
                                             }
                                         } else {
-                                            mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvo disponibilidad.");
+                                            mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvieron datos.");
                                             return mensaje;
                                         }
-                                    } else {
-                                        mensaje.setMensaje("La matricula no pertenece al usuario");
-                                        return mensaje;
                                     }
                                 } else {
-                                    mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvieron datos.");
-                                    return mensaje;
+                                    mensaje.setMensaje("No se obtuvieron datos de las placas ingresadas");
+                                    return mensaje;  //Se verifican que no hay registro de matriculas en la cuenta.
                                 }
                             } else {
-                                mensaje.setMensaje("El transporte no puede asignarse por estar inactivo.");
-                                return mensaje;
+                                mensaje.setMensaje("El usuario no tiene asignado esta cuenta.");
+                                return mensaje;  //Se verifica que el usuario de la cuenta ingresada no es el correcto
                             }
                         } else {
-                            mensaje.setMensaje("No se puede asignar este vehiculo, no se obtuvieron datos.");
+                            mensaje.setMensaje("No se permite el ingreso de mas parcialidades para esta cuenta");
                             return mensaje;
                         }
+                    } else {
+                        mensaje.setMensaje("La cuenta ya no permite mas registro de parcialidades");
+                        return mensaje;
                     }
                 } else {
-                    mensaje.setMensaje("No se obtuvieron datos de las placas ingresadas");
-                    return mensaje;  //Se verifican que no hay registro de matriculas en la cuenta.
+                    mensaje.setMensaje("No se obtuvieron datos de la cuenta");
+                    return mensaje;  //Si la cuenta no existe
                 }
-            } else {
-                mensaje.setMensaje("El usuario no tiene asignado esta cuenta.");
-                return mensaje;  //Se verifica que el usuario de la cuenta ingresada no es el correcto
-            }}else{
-                mensaje.setMensaje("No se permite el ingreso de mas parcialidades para esta cuenta");
-                return mensaje;
-            }}else{
-                mensaje.setMensaje("La cuenta ya no permite mas registro de parcialidades");
-                return mensaje;
-            }
-        } else {
-            mensaje.setMensaje("No se obtuvieron datos de la cuenta");
-            return mensaje;  //Si la cuenta no existe
-        }
     }
     
     
     public boolean consultarCuenta(Integer id_cuenta) {
         String respuesta = AgricultorRepositories.consultarCuenta(id_cuenta);
-        String matriculas = AgricultorRepositories.consultarMatriculas(id_cuenta);
-        if (respuesta != null && respuesta != "") {
+        //String matriculas = AgricultorRepositories.consultarMatriculas(id_cuenta);
+        if (respuesta != null || respuesta != "") {
             String[] parts = respuesta.split(",");
             this.id_cuenta = parts[0]; //numero de cuenta
             this.estado_cuenta = parts[1]; //estado de la cuenta
@@ -233,6 +237,8 @@ public class AgricultorServices {
         }
     }
     
+    
+    
     public boolean matriculas(Integer id){
         String matriculas = AgricultorRepositories.consultarMatriculas(id);
         if (matriculas != null && matriculas != "") {
@@ -242,6 +248,5 @@ public class AgricultorServices {
             return false;
         }
     }
-    
     
 }

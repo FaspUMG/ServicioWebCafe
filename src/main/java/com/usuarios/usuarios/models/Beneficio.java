@@ -26,17 +26,19 @@ public class Beneficio {
     private String matricula_autorizada;
     private String licencia_autorizada;
     private Date fecha_asignacion;
+    private String usuario_beneficio;
 
     public Beneficio() {
     }
 
-    public Beneficio(Integer id_ingreso, Integer id_cuenta, String usuario_agricultor, String matricula_autorizada, String licencia_autorizada, Date fecha_asignacion) {
+    public Beneficio(Integer id_ingreso, Integer id_cuenta, String usuario_agricultor, String matricula_autorizada, String licencia_autorizada, Date fecha_asignacion, String usuario_beneficio) {
         this.id_ingreso = id_ingreso;
         this.id_cuenta = id_cuenta;
         this.usuario_agricultor = usuario_agricultor;
         this.matricula_autorizada = matricula_autorizada;
         this.licencia_autorizada = licencia_autorizada;
         this.fecha_asignacion = fecha_asignacion;
+        this.usuario_beneficio = usuario_beneficio;
     }
 
     @Id
@@ -70,6 +72,11 @@ public class Beneficio {
     public Date getFecha_asignacion() {
         return fecha_asignacion;
     }
+    @Column (name="usuario_beneficio", length=13)
+    public String getUsuario_beneficio() {
+        return usuario_beneficio;
+    }
+    
 
     public void setId_ingreso(Integer id_ingreso) {
         this.id_ingreso = id_ingreso;
@@ -94,6 +101,10 @@ public class Beneficio {
 
     public void setFecha_asignacion(Date fecha_asignacion) {
         this.fecha_asignacion = fecha_asignacion;
+    }
+
+    public void setUsuario_beneficio(String usuario_beneficio) {
+        this.usuario_beneficio = usuario_beneficio;
     }
       
 }

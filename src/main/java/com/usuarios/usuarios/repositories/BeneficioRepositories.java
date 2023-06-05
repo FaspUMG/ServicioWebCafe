@@ -21,19 +21,28 @@ import org.springframework.data.repository.query.Param;
 public interface BeneficioRepositories extends CrudRepository<Beneficio,Integer>{
     
     @Transactional
-    @Query(value = "select id_cuenta,estado_cuenta,usuario_agricultor,numero_pesajes_registrados,numero_parcialidades,peso_total_de_envio  from cuenta where id_cuenta= :pid_cuenta", nativeQuery = true)
-    public String consultarCuenta(@Param("pid_cuenta") Integer pid_cuenta);
+    @Query(value = "select id_cuenta,estado_cuenta,usuario_agricultor,numero_pesajes_registrados,numero_parcialidades,peso_total_de_envio  from cuenta where id_cuenta=:pid_cuenta", nativeQuery = true)
+    public String consultarCuenta(@Param("pid_cuenta") Integer id_cuenta);
     
     @Transactional
-    @Query(value = "select estado from transporte where matricula= :pmatricula and usuario_creo = :puser", nativeQuery = true)
+    @Query(value = "select ingreso_en_beneficio from agricultor where usuario=:pa and cuenta=:pc and id_parcialidad=:pid", nativeQuery = true)
+    public String consultarparcialidad(@Param("pa") String a, @Param("pc") Integer c, @Param("pid") Integer id);
+    
+    @Transactional
+    @Query(value = "select estado from transporte where matricula= :pmatricula and usuario_creo=:puser", nativeQuery = true)
     public String consultarMatricula(@Param("pmatricula") String matricula, @Param("puser") String user);
     
     @Transactional
-    @Query(value = "select estado from transportista where numero_licencia= :pnumero_licencia and usuario_creo = :puser", nativeQuery = true)
+    @Query(value = "select estado from transportista where numero_licencia= :pnumero_licencia and usuario_creo=:puser", nativeQuery = true)
     public String consultarLicencia(@Param("pnumero_licencia") String numero_licencia, @Param("puser") String user);
     
     @Transactional
     @Modifying(flushAutomatically = true)
     @Query(value = "update cuenta set  estado_cuenta= 'Cuenta Abierta', fecha_modificacion= :pfecha where id_cuenta=:pid_cuenta", nativeQuery = true)
     public int actualizaE(@Param("pid_cuenta") Integer pid_cuenta, @Param("pfecha") Date fecha);
+    
+    @Transactional
+    @Modifying(flushAutomatically = true)
+    @Query(value = "update agricultor set ingreso_en_beneficio=true, usuario_concedio_ingreso=:puser, fecha_entrega=:pfecha where id_parcialidad=:pid ", nativeQuery = true)
+    public int actualizaParcialidad(@Param("pid") Integer pid, @Param("puser") String user, @Param("pfecha") Date fecha);
 }

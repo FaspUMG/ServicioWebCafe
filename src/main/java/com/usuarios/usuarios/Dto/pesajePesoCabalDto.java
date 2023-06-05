@@ -16,6 +16,6 @@ public class pesajePesoCabalDto {
     private Integer peso_de_camion;
     private String agricultor;
     private String usuario_registro_pesaje;
-    private Date fecha_creacion ;
+    //private Date fecha_creacion ;
     //private Integer peso_cargamento;
  }
