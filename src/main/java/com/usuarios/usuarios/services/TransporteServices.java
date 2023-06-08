@@ -115,10 +115,10 @@ public class TransporteServices {
         mensajeDto mensaje = new mensajeDto();
             int matricula = this.TransporteRepositories.eliminaTransporte(pMatricula);
             if (matricula > 0) {
-                mensaje.setMensaje("El transporte con las placas: "+pMatricula+" fue eliminado con exito");
+                mensaje.setMensaje("El transporte fue inactivado con exito");
                 return mensaje;
             } else {
-                mensaje.setMensaje("Error al eliminar el transporte con las placas: "+pMatricula+"");
+                mensaje.setMensaje("Ocurrio un error, Verifique No. de Matricula Ingresada");
                 return mensaje;
             } 
     }

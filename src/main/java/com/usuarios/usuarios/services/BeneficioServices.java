@@ -66,7 +66,7 @@ public class BeneficioServices {
                                 String lic = BeneficioRepositories.consultarLicencia(licencia, user);
                                 if (lic != null) {
                                     if (lic.equals(activo)) {
-                                        mensaje.setMensaje(" El ingreso es permitido");
+                                        mensaje.setMensaje("El ingreso es permitido, Bienvenido a Beneficio");
 
                                         int actualizarEstado = BeneficioRepositories.actualizaE(dto.getId_cuenta(), fecha);
                                         int actualizarParcialidad = BeneficioRepositories.actualizaParcialidad(dto.getId_parcialidad(),dto.getUsuario_beneficio(), fecha);
@@ -103,7 +103,7 @@ public class BeneficioServices {
         }
     }
 
-    public boolean parcialidad(String u, Integer c, Integer id) {
+    public boolean parcialidad(String u, Integer c, String id) {
         String datos = BeneficioRepositories.consultarparcialidad(u, c, id);
         if (datos != null || datos != "") {
             this.registro_par = datos;

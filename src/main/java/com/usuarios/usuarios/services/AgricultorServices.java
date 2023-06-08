@@ -54,6 +54,7 @@ public class AgricultorServices {
         Agricultor.setCuenta(dto.getCuenta());
         Agricultor.setUsuario(dto.getUsuario());
         Agricultor.setMatricula(dto.getMatricula());
+        Agricultor.setId_parcialidad(dto.getId_parcialidad());
         Agricultor.setNumero_licencia(dto.getNumero_licencia());
         Agricultor.setPeso_de_envio(dto.getPeso_de_envio());
         Agricultor.setIngreso_en_beneficio(false);
@@ -62,7 +63,7 @@ public class AgricultorServices {
         String placa_encontrada = "";
         
         
-                Integer parcialidades = AgricultorRepositories.consultarPar(dto.getCuenta());
+                Integer parcialidades = AgricultorRepositories.consultarPar(dto.getCuenta());////////////Verificar
                 if (parcialidades != null) {
                     this.parcialidadesCuenta = parcialidades;
                 } else {
@@ -80,14 +81,23 @@ public class AgricultorServices {
                 //Inician validaciones para la parcialidad.
                 if (this.consultarCuenta(dto.getCuenta())) {
                     if (estado_cuenta != "Pesaje Finalizado") {
-                        if (this.generadas < this.parcialidadesCuenta) {
+                        if (this.generadas < this.parcialidadesCuenta) {///////////////////////////////////Verificar
                             if (this.usuario_agricultor.equals(dto.getUsuario())) {
                                 if (this.matriculas(dto.getCuenta())) { //llamando a metodo y validando matriculas
-                                    String[] placas = this.matriculas_autorizadas.split(",");
+                                    
+                                    
+                                    
+                                    String[] placas =matriculas_autorizadas.split(",");
+                                    System.out.println("matriculas autorizadas......."+placas);
+                                    System.out.println("matriculas autorizadas......."+matriculas_autorizadas);
                                     for (int i = 0; i < placas.length; i++) {
-                                        if (placa.equals(placas[i])) {
+                                        System.out.println("holaaaaaaaaaaa"+ placas[i]);
+                                        System.out.println("equals8888888888888888888"+ placa.getClass());
+                                        System.out.println("equals8888888888888888888"+ placas[i].getClass());
+                                        if (placas[i].equals(dto.getMatricula())) {
                                             System.out.println("Mostrando la placa enviada para pesaje: " + placas[i]);
                                             placa_encontrada = placas[i];
+                                            System.out.println("//////////////////"+ placa_encontrada);
                                         } else {
                                             System.out.println("La no hay registro de la placa ingresada");
                                             //Se validad que la placa ingresada no esta registrada.
@@ -126,11 +136,16 @@ public class AgricultorServices {
                                                                                     System.out.println("disponibilidad Licencia****************" + liDis);
                                                                                     if (liDis != null) {
                                                                                         Integer registroPar = AgricultorRepositories.actualizaPar(dto.getCuenta());
+                                                                                        System.out.println("Pasando este paso");
                                                                                         if (registroPar > 0) {
+                                                                                            System.out.println("Si respondio****");
                                                                                             int modmatri = this.AgricultorRepositories.actualizaDisTransporte(dto.getMatricula());
                                                                                             if (modmatri > 0) {
+                                                                                                System.out.println("Actualizo disponibilidad matricula");
                                                                                                 int modlic = this.AgricultorRepositories.actualizaDisLic(dto.getNumero_licencia());
-                                                                                                if (modmatri > 0) {
+                                                                                                if (modmatri > 0) 
+                                                                                                {
+                                                                                                    System.out.println("modifico disponibilidad licencia ");
                                                                                                     AgricultorRepositories.save(Agricultor);
                                                                                                     mensaje.setMensaje("Parcialidad Registrada con exito");
                                                                                                     return mensaje;
@@ -219,7 +234,7 @@ public class AgricultorServices {
     }
     
     
-    public boolean consultarCuenta(Integer id_cuenta) {
+    public boolean consultarCuenta(String id_cuenta) {
         String respuesta = AgricultorRepositories.consultarCuenta(id_cuenta);
         //String matriculas = AgricultorRepositories.consultarMatriculas(id_cuenta);
         if (respuesta != null || respuesta != "") {
@@ -239,7 +254,7 @@ public class AgricultorServices {
     
     
     
-    public boolean matriculas(Integer id){
+    public boolean matriculas(String id){
         String matriculas = AgricultorRepositories.consultarMatriculas(id);
         if (matriculas != null && matriculas != "") {
          this.matriculas_autorizadas = matriculas;

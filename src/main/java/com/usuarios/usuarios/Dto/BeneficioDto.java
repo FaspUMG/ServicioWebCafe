@@ -24,6 +24,6 @@ public class BeneficioDto {
     private String matricula_autorizada;
     private String licencia_autorizada;
     private String usuario_beneficio;
-    private Integer id_parcialidad;
+    private String id_parcialidad;
     //private Date fecha_asignacion;
 }

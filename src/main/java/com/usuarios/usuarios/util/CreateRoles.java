@@ -5,9 +5,9 @@
  */
 package com.usuarios.usuarios.util;
 
-import com.usuarios.usuarios.security.models.Rol;
-import com.usuarios.usuarios.security.roles.RolNombre;
-import com.usuarios.usuarios.security.service.RolService;
+import com.usuarios.usuarios.models.Rol;
+import com.usuarios.usuarios.roles.RolNombre;
+import com.usuarios.usuarios.services.RolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -24,13 +24,13 @@ public class CreateRoles implements CommandLineRunner{
     
     @Override
     public void run(String... args) throws Exception {
-        /*Rol rolAdmin = new Rol(RolNombre.ROLE_ADMIN);
+     /* Rol rolAdmin = new Rol(RolNombre.ROLE_ADMIN);
         Rol rolUser = new Rol(RolNombre.ROLE_USER);
-        Rol rolAgr.icultor = new Rol(RolNombre.ROLE_AGRICULTOR);
+        Rol rolAgricultor = new Rol(RolNombre.ROLE_AGRICULTOR);
         Rol rolPesoCabal = new Rol(RolNombre.ROL_PESOCABAL);
         rolService.save(rolAdmin);
-        rolServicesave(rolUser);
+        rolService.save(rolUser);
         rolService.save(rolAgricultor);
-        rolService.save(rolPesoCabal); */ 
+        rolService.save(rolPesoCabal); */
     }
 }

@@ -32,4 +32,5 @@ public class pesajePesoCabalController {
     public mensajeDto createPesaje(@RequestBody pesajePesoCabalDto dto){
         return pesajePesoCabalServices.createPesaje(dto);
     }
+    
 }

@@ -26,7 +26,7 @@ public interface BeneficioRepositories extends CrudRepository<Beneficio,Integer>
     
     @Transactional
     @Query(value = "select ingreso_en_beneficio from agricultor where usuario=:pa and cuenta=:pc and id_parcialidad=:pid", nativeQuery = true)
-    public String consultarparcialidad(@Param("pa") String a, @Param("pc") Integer c, @Param("pid") Integer id);
+    public String consultarparcialidad(@Param("pa") String a, @Param("pc") Integer c, @Param("pid") String id);
     
     @Transactional
     @Query(value = "select estado from transporte where matricula= :pmatricula and usuario_creo=:puser", nativeQuery = true)
@@ -44,5 +44,5 @@ public interface BeneficioRepositories extends CrudRepository<Beneficio,Integer>
     @Transactional
     @Modifying(flushAutomatically = true)
     @Query(value = "update agricultor set ingreso_en_beneficio=true, usuario_concedio_ingreso=:puser, fecha_entrega=:pfecha where id_parcialidad=:pid ", nativeQuery = true)
-    public int actualizaParcialidad(@Param("pid") Integer pid, @Param("puser") String user, @Param("pfecha") Date fecha);
+    public int actualizaParcialidad(@Param("pid") String pid, @Param("puser") String user, @Param("pfecha") Date fecha);
 }

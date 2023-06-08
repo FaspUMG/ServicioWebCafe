@@ -24,8 +24,6 @@ public interface CuentaRepositories extends CrudRepository<Cuenta,Integer> {
     @Override
     public List<Cuenta> findAll();
     
-    
-    
     @Query(value = "select * from cuenta where id_cuenta= :idCuenta", nativeQuery = true)
     @Transactional(readOnly=true)
     public List<Cuenta>consultarCuenta(@Param("idCuenta") Integer idCuenta);
@@ -33,5 +31,9 @@ public interface CuentaRepositories extends CrudRepository<Cuenta,Integer> {
     @Query(value = "select * from cuenta where usuario_agricultor=:pa  ", nativeQuery = true)
     @Transactional 
     public List<Cuenta> consulta( @Param("pa")String a);
+    
+    @Query(value = "select estado_cuenta from cuenta where id_cuenta=:pa", nativeQuery = true)
+    @Transactional 
+    public String obtenerEstado( @Param("pa") String a);
     
 }

@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class AgricultorDto {
-   // private Integer id_parcialidad;
-    private Integer cuenta;
+    private String id_parcialidad;
+    private String cuenta;
     private String  usuario;
     private String matricula;
     private String numero_licencia;

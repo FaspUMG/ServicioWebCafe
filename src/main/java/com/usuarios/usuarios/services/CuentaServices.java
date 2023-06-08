@@ -34,7 +34,6 @@ public class CuentaServices {
     public List<Cuenta> getAllCuenta() {
         return CuentaRepositories.findAll();
     }
-    
      
     @Transactional
     public List<Cuenta> getAllCuentas(String a) {
@@ -42,12 +41,35 @@ public class CuentaServices {
     }
     
     @Transactional
+    public mensajeDto actualizarCuenta(CuentaDto dto) {
+        mensajeDto mensaje = new mensajeDto();
+        final Cuenta Cuentas = new Cuenta();
+        String cuenta = CuentaRepositories.obtenerEstado(dto.getId_cuenta());
+        if(cuenta!=null){
+            if(cuenta == "Pesaje Finalizado"){
+                mensaje.setMensaje("Cuenta Creada Exitosamente, su numero de cuenta es: ");
+                return  mensaje;
+            }else  if(cuenta == "Cuenta Abierta"){
+                mensaje.setMensaje("Cuenta Creada Exitosamente, su numero de cuenta es: ");
+                return  mensaje;
+            }else {
+                mensaje.setMensaje("Cuenta Creada Exitosamente, su numero de cuenta es: ");
+                return  mensaje;
+            }
+        }else{
+            mensaje.setMensaje("No se Obtubo Informacion de la Cuenta ");
+            return  mensaje;
+        } 
+    }
+    
+    
+    @Transactional
     public mensajeDto crearCuenta(CuentaDto dto) {
         mensajeDto mensaje = new mensajeDto();
         int valor = this.getFiveDigitsNumber();
         java.util.Date fecha = new Date();
         final Cuenta Cuenta = new Cuenta();
-        Cuenta.setId_cuenta(valor);
+        Cuenta.setId_cuenta(dto.getId_cuenta());
         Cuenta.setFecha_creacion(fecha);
         Cuenta.setEstado_cuenta("Cuenta Creada");
         Cuenta.setPeso_total_de_envio(dto.getPeso_total_de_envio());
@@ -57,7 +79,7 @@ public class CuentaServices {
         Cuenta.setNumero_pesajes_registrados(0);
         Cuenta.setParcialidades_generadas(0);
         CuentaRepositories.save(Cuenta);
-        mensaje.setMensaje("Cuenta Creada Exitosamente, su numero de cuenta es: "+ valor);
+        mensaje.setMensaje("Cuenta Creada Exitosamente");
         return  mensaje;
     }
 }

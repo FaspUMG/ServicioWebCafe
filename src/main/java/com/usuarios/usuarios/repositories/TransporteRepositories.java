@@ -31,7 +31,7 @@ public interface TransporteRepositories extends CrudRepository<Transporte,Intege
     //Area de Consultas a BD
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update transporte  set estado=1030 where matricula= :pMatricula", nativeQuery = true)
+    @Query(value = "update transporte  set estado=1028 where matricula= :pMatricula", nativeQuery = true)
     public int eliminaTransporte(@Param("pMatricula") String pMatricula);
     
     

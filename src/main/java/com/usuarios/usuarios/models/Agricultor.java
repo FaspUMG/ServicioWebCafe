@@ -20,8 +20,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Agricultor", schema="public")
 public class Agricultor {
-    private Integer cuenta;
-    private Integer id_parcialidad; 
+    private String cuenta;
+    private String id_parcialidad; 
     private String  usuario;
     private String matricula;
     private String numero_licencia;
@@ -36,7 +36,7 @@ public class Agricultor {
     public Agricultor() {
     }
 
-    public Agricultor(Integer id_parcialidad, Integer cuenta, String usuario, String matricula, String numero_licencia, String peso_de_envio, Date fecha_creacion, Date fecha_entrega, String usuario_concedio_ingreso, boolean ingreso_en_beneficio, Integer ba2, String usuario_registro_pesaje) {
+    public Agricultor(String id_parcialidad, Integer String, String usuario, String matricula, String numero_licencia, String peso_de_envio, Date fecha_creacion, Date fecha_entrega, String usuario_concedio_ingreso, boolean ingreso_en_beneficio, Integer ba2, String usuario_registro_pesaje) {
         this.id_parcialidad = id_parcialidad;
         this.cuenta = cuenta;
         this.usuario = usuario;
@@ -53,13 +53,12 @@ public class Agricultor {
 
     @Id
     @Column (name="id_parcialidad")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId_parcialidad() {
+    public String getId_parcialidad() {
         return id_parcialidad;
     }
 
     @Column (name="cuenta")
-    public Integer getCuenta() {
+    public String getCuenta() {
         return cuenta;
     }
     
@@ -113,11 +112,11 @@ public class Agricultor {
         return usuario_registro_pesaje;
     }
 
-    public void setId_parcialidad(Integer id_parcialidad) {
+    public void setId_parcialidad(String id_parcialidad) {
         this.id_parcialidad = id_parcialidad;
     }
 
-    public void setCuenta(Integer cuenta) {
+    public void setCuenta(String cuenta) {
         this.cuenta = cuenta;
     }
 

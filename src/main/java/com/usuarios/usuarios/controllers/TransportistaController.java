@@ -47,7 +47,7 @@ public class TransportistaController {
     //metodo para crear un usuario
     @CrossOrigin(origins="http://localhost:4200")
     @PostMapping(value="Transportista/eliminarTransportista")
-    public String eliminarTransportista(@RequestBody TransportistaDto dto)throws Exception{
+    public mensajeDto eliminarTransportista(@RequestBody TransportistaDto dto)throws Exception{
         return TransportistaServices.eliminarTransportista(dto);
     }
     

@@ -36,7 +36,7 @@ public interface TransportistaRepositories extends CrudRepository<Transportista,
     //Area de Consultas a BD
     @Transactional
     @Modifying(flushAutomatically = true)
-    @Query(value = "update transportista  set estado=1030, fecha_modificacion= :pfecham where numero_licencia= :plicencia", nativeQuery = true)
+    @Query(value = "update transportista  set estado=1028, fecha_modificacion= :pfecham where numero_licencia= :plicencia", nativeQuery = true)
     public int eliminarTransportista( @Param("plicencia") String plicencia, @Param("pfecham") Date pfecham);
     
     @Query(value = "select * from transportista where estado=1020 and usuario_creo=:pa", nativeQuery = true)

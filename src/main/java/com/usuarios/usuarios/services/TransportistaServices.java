@@ -104,14 +104,18 @@ public class TransportistaServices {
    }
    
    //Metodo para eliminar Transporte activo o inactivo.
-    public String eliminarTransportista(TransportistaDto dto) throws Exception {
+    public mensajeDto eliminarTransportista(TransportistaDto dto) throws Exception {
+        mensajeDto mensaje = new mensajeDto();
         Date pfecham = this.fecha;
         String plicencia = dto.getNumero_licencia();  
             int licencia = this.TransportistaRepositories.eliminarTransportista(plicencia, pfecham);
             if (licencia > 0) {
-                return "El transporte con las placas: "+ plicencia + " fue eliminado con exito";
+                mensaje.setMensaje("El Transportista fue Inactivado con exito");
+                return mensaje;
+                
             } else {
-                return "Error al eliminar el transporte con las placas: "+ plicencia;
+                mensaje.setMensaje("Ocurrio un error, Verifique No. de Licencia Ingresada");
+                return mensaje;
             }
     }
     

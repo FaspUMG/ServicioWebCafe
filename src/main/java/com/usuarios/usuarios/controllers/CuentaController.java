@@ -29,7 +29,6 @@ public class CuentaController {
     @Autowired
     CuentaServices CuentaServices;
     
-    
     @CrossOrigin(origins="http://localhost:4200")
     @GetMapping(value="Cuenta/CuentasAlmacenadas")
     public List<Cuenta> getAllAgricultor (){
@@ -41,6 +40,13 @@ public class CuentaController {
     @PostMapping(value="Cuenta/CrearCuenta")
     public mensajeDto crearAgricultor(@RequestBody CuentaDto dto) {
         return CuentaServices.crearCuenta(dto);
+    }
+    
+    //metodo para crear un usuario
+    @CrossOrigin(origins="http://localhost:4200")
+    @PostMapping(value="Cuenta/ActualizarCuenta")
+    public mensajeDto actualizarCuenta(@RequestBody CuentaDto dto) {
+        return CuentaServices.actualizarCuenta(dto);
     }
     
     @CrossOrigin(origins="http://localhost:4200")

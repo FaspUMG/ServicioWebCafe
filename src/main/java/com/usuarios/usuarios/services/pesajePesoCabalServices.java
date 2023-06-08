@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.usuarios.usuarios.repositories.TransportistaRepositories;
+import com.usuarios.usuarios.repositoriesPesaje.RepoPesajes;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,9 +39,6 @@ public class pesajePesoCabalServices {
     
     @Autowired
     pesajePesoCabalRepositories pesajePesoCabalRepositories;
-    
-    @Autowired
-    CuentaRepositories CuentaRepositories;
     
     @Transactional
     public List<pesajePesoCabal> getAllPesajes(){
@@ -72,7 +70,7 @@ public class pesajePesoCabalServices {
             if(this.consultarCuenta(cuenta)){
             this.consultarCuenta(cuenta);
             if(this.estado_cuenta.equals(this.creada) || this.estado_cuenta.equals(this.completada) || this.estado_cuenta.equals(this.confirmada )|| this.estado_cuenta.equals(this.cerrada )){
-                mensaje.setMensaje("No se permite registrar el pesaje.  Estado de la cuenta: "+ this.estado_cuenta);
+                mensaje.setMensaje("No se permite registrar el pesaje. Verifique el Estado de la Cuenta");
                 return mensaje;
             }else{
                 System.out.println("El estado actual de la cuenta es: "+this.estado_cuenta);
@@ -109,6 +107,7 @@ public class pesajePesoCabalServices {
                                             if (modmatri > 0) {
                                                 int modlic = this.pesajePesoCabalRepositories.actualizaDisLic(dto.getNumero_licencia());
                                                 if (modmatri > 0) {
+                                                
                                                     pesajePesoCabalRepositories.save(pesajePesoCabal);
                                                     mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada ");
                                                     return mensaje;
@@ -142,6 +141,7 @@ public class pesajePesoCabalServices {
                                     } else if (this.numero_pesajes_registrados > 0 && this.numero_pesajes_registrados <= this.numero_parcialidades - 1) {
                                         this.completado = pesajePesoCabalRepositories.actualizaUltimoPesaje(cuenta);
                                         if (this.completado > 0) {
+                                            
                                             pesajePesoCabalRepositories.save(pesajePesoCabal);
                                             mensaje.setMensaje("Pesaje Almacenado con exito y Cuenta actualizada ");
                                             return mensaje;
